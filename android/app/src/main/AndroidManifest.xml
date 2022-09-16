@@ -1,7 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.foodiee_app">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <application
-        android:label="foodiee_app"
+       android:usesCleartextTraffic="true"
+       android:label="foodiee_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

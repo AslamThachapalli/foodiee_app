@@ -20,16 +20,18 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
   }
 }
 
-Either<ValueFailure<int>, int> validatePhoneNumber(int input) {
+Either<ValueFailure<int>, int> validatePhoneNumber(int? input) {
   if (input.toString().length == 10) {
-    return right(input);
-  } else {
+    return right(input!);
+  } else if (input != null) {
     return left(ValueFailure.invalidPhoneNumber(failedValue: input));
+  }else{
+    return left(const ValueFailure.invalidPhoneNumber(failedValue: 0));
   }
 }
 
 Either<ValueFailure<String>, String> validateUserName(String input) {
-  if (input.length < 4) {
+  if (input.length > 3) {
     return right(input);
   } else {
     return left(ValueFailure.shortUserName(failedValue: input));

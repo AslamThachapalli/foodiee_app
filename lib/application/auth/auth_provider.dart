@@ -10,6 +10,8 @@ import '../../domain/auth/i_auth_facade.dart';
 class AuthState {
   EmailAddress emailAddress;
   Password password;
+  PhoneNumber phoneNumber;
+  UserName userName;
   bool showErrorMessages;
   bool isSubmitting;
   Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption;
@@ -18,6 +20,8 @@ class AuthState {
   AuthState({
     required this.emailAddress,
     required this.password,
+    required this.phoneNumber,
+    required this.userName,
     required this.showErrorMessages,
     required this.isSubmitting,
     required this.authFailureOrSuccessOption,
@@ -31,79 +35,102 @@ class AuthProvider with ChangeNotifier {
 
   AuthProvider(this._authFacade);
 
-  AuthState _authState() {
-    return AuthState(
-      emailAddress: EmailAddress(''),
-      password: Password(''),
-      showErrorMessages: false,
-      isSubmitting: false,
-      authFailureOrSuccessOption: none(),
-      isAuthenticated: false,
-    );
-  }
+  AuthState _authState = AuthState(
+    emailAddress: EmailAddress(''),
+    password: Password(''),
+    phoneNumber: PhoneNumber(null),
+    userName: UserName(''),
+    showErrorMessages: false,
+    isSubmitting: false,
+    authFailureOrSuccessOption: none(),
+    isAuthenticated: false,
+  );
 
   AuthState get authState {
-    return _authState();
+    return _authState;
   }
 
   void emailChanged(String emailStr) {
-    _authState().emailAddress = EmailAddress(emailStr);
+    _authState.emailAddress = EmailAddress(emailStr);
     notifyListeners();
   }
 
   void passwordChanged(String passwordStr) {
-    _authState().password = Password(passwordStr);
+    _authState.password = Password(passwordStr);
+    notifyListeners();
+  }
+
+  void phoneNumberChanged(int numberStr) {
+    _authState.phoneNumber = PhoneNumber(numberStr);
+    notifyListeners();
+  }
+
+  void userNameChanged(String userNameStr) {
+    _authState.userName = UserName(userNameStr);
     notifyListeners();
   }
 
   Future<void> signInWithEmailAndPasswordPressed() async {
     Either<AuthFailure, Unit>? failureOrSuccess;
-    final isEmailValid = _authState().emailAddress.value.isRight();
-    final isPasswordValid = _authState().password.value.isRight();
+    final isEmailValid = _authState.emailAddress.value.isRight();
+    final isPasswordValid = _authState.password.value.isRight();
+    final isPhoneNumberValid = _authState.phoneNumber.value.isRight();
+    final isUserNameValid = _authState.userName.value.isRight();
 
-    if (isEmailValid && isPasswordValid) {
-      _authState().isSubmitting = true;
+    if (isEmailValid &&
+        isPasswordValid &&
+        isPhoneNumberValid &&
+        isUserNameValid) {
+      _authState.isSubmitting = true;
 
       failureOrSuccess = await _authFacade.signInWithEmailAndPassword(
-        emailAddress: _authState().emailAddress,
-        password: _authState().password,
+        emailAddress: _authState.emailAddress,
+        password: _authState.password,
       );
     }
-    _authState().isSubmitting = false;
-    _authState().showErrorMessages = true;
-    _authState().authFailureOrSuccessOption = optionOf(failureOrSuccess);
+    _authState.isSubmitting = false;
+    _authState.showErrorMessages = true;
+    _authState.authFailureOrSuccessOption = optionOf(failureOrSuccess);
 
     notifyListeners();
   }
 
   Future<void> registerWithEmailAndPasswordPressed() async {
     Either<AuthFailure, Unit>? failureOrSuccess;
-    final isEmailValid = _authState().emailAddress.value.isRight();
-    final isPasswordValid = _authState().password.value.isRight();
+    final isEmailValid = _authState.emailAddress.value.isRight();
+    final isPasswordValid = _authState.password.value.isRight();
+    final isPhoneNumberValid = _authState.phoneNumber.value.isRight();
+    final isUserNameValid = _authState.userName.value.isRight();
 
-    if (isEmailValid && isPasswordValid) {
-      _authState().isSubmitting = true;
+    // print(_authState.emailAddress.value);
+    // print(_authState.password.value);
+
+    if (isEmailValid &&
+        isPasswordValid &&
+        isPhoneNumberValid &&
+        isUserNameValid) {
+      _authState.isSubmitting = true;
 
       failureOrSuccess = await _authFacade.registerWithEmailAndPassword(
-        emailAddress: _authState().emailAddress,
-        password: _authState().password,
+        emailAddress: _authState.emailAddress,
+        password: _authState.password,
       );
     }
-    _authState().isSubmitting = false;
-    _authState().showErrorMessages = true;
-    _authState().authFailureOrSuccessOption = optionOf(failureOrSuccess);
+    _authState.isSubmitting = false;
+    _authState.showErrorMessages = true;
+    _authState.authFailureOrSuccessOption = optionOf(failureOrSuccess);
 
     notifyListeners();
   }
 
   Future<void> signInWithGooglePressed() async {
     Either<AuthFailure, Unit>? failureOrSuccess;
-    _authState().isSubmitting = true;
+    _authState.isSubmitting = true;
 
     failureOrSuccess = await _authFacade.signInWithGoogle();
 
-    _authState().isSubmitting = false;
-    _authState().authFailureOrSuccessOption = optionOf(failureOrSuccess);
+    _authState.isSubmitting = false;
+    _authState.authFailureOrSuccessOption = optionOf(failureOrSuccess);
 
     notifyListeners();
   }
@@ -111,8 +138,8 @@ class AuthProvider with ChangeNotifier {
   Future<void> authCheckRequested() async {
     final userOption = await _authFacade.getSignedInUser();
     userOption.fold(
-      () => _authState().isAuthenticated = false,
-      (a) => _authState().isAuthenticated = true,
+      () => _authState.isAuthenticated = false,
+      (_) => _authState.isAuthenticated = true,
     );
 
     notifyListeners();
@@ -120,7 +147,7 @@ class AuthProvider with ChangeNotifier {
 
   Future<void> signedOut() async {
     await _authFacade.signOut();
-    _authState().isAuthenticated = false;
+    _authState.isAuthenticated = false;
 
     notifyListeners();
   }

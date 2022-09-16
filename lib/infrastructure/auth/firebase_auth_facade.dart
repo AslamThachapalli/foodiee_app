@@ -23,8 +23,8 @@ class FirebaseAuthFacade implements IAuthFacade {
   }) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
-        email: emailAddress.toString(),
-        password: password.toString(),
+        email: emailAddress.getOrCrash(),
+        password: password.getOrCrash(),
       );
       return right(unit);
     } on FirebaseAuthException catch (e) {
@@ -34,8 +34,12 @@ class FirebaseAuthFacade implements IAuthFacade {
           e.code == 'weak-password') {
         return left(const AuthFailure.emailAlreadyInUse());
       } else {
+        print(e.code);
         return left(const AuthFailure.serverError());
       }
+    } catch (e) {
+      print(e);
+      return left(const AuthFailure.serverError());
     }
   }
 
@@ -46,16 +50,20 @@ class FirebaseAuthFacade implements IAuthFacade {
   }) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
-        email: emailAddress.toString(),
-        password: password.toString(),
+        email: emailAddress.getOrCrash(),
+        password: password.getOrCrash(),
       );
       return right(unit);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email' || e.code == 'wrong-password') {
         return left(const AuthFailure.invalidEmailAndPasswordCombination());
       } else {
+        print(e.code);
         return left(const AuthFailure.serverError());
       }
+    } catch (e) {
+      print(e);
+      return left(const AuthFailure.serverError());
     }
   }
 
@@ -82,7 +90,7 @@ class FirebaseAuthFacade implements IAuthFacade {
   Future<Option<CurrentUser>> getSignedInUser() async {
     User? firebaseUser = _firebaseAuth.currentUser;
     if (firebaseUser != null) {
-      return optionOf(CurrentUser(id: UniqueId(firebaseUser.uid)));
+      return some(CurrentUser(id: UniqueId(firebaseUser.uid)));
     } else {
       return none();
     }

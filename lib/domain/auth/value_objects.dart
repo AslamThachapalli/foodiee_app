@@ -31,7 +31,7 @@ class PhoneNumber extends ValueObject<int> {
   @override
   final Either<ValueFailure<int>, int> value;
 
-  factory PhoneNumber(int input) {
+  factory PhoneNumber(int? input) {
     return PhoneNumber._(validatePhoneNumber(input));
   }
 
