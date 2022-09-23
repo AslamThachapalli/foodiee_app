@@ -154,7 +154,6 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  print('tapped');
                   isRegistered
                       ? Provider.of<AuthProvider>(context, listen: false)
                           .signInWithEmailAndPasswordPressed()
