@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:foodiee_app/injection.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 import '../../application/product_fetching/product_provider.dart';
 import '../../application/auth/auth_provider.dart';
-import '../auth/auth_screen.dart';
+import './app_colors.dart';
+
 import '../bottom_nav/bottom_nav_screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -22,17 +24,17 @@ class MyApp extends StatelessWidget {
           create: (context) => getIt<AuthProvider>(),
         ),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Foodiee_app',
         home: BottomNavScreen(),
         theme: ThemeData.light().copyWith(
             colorScheme: ThemeData.light().colorScheme.copyWith(
-                  secondary: Colors.greenAccent,
+                  secondary: AppColors.mainColor,
                   onSecondary: Colors.white,
                 ),
             bottomNavigationBarTheme: BottomNavigationBarThemeData().copyWith(
-              selectedItemColor: Colors.greenAccent,
+              selectedItemColor: AppColors.mainColor,
               unselectedItemColor: Colors.grey[600],
               elevation: 5,
             ),
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-                primary: Colors.greenAccent,
+                primary: AppColors.mainColor,
               ),
             )),
       ),
