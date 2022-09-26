@@ -10,10 +10,15 @@ class ProductNameAndStarColumn extends StatelessWidget {
   final String text;
   final double size;
   final double stars;
+  String? location;
 
-  ProductNameAndStarColumn(
-      {required this.text, this.size = 0, required this.stars, Key? key})
-      : super(key: key);
+  ProductNameAndStarColumn({
+    required this.text,
+    this.size = 0,
+    required this.stars,
+    this.location,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,18 +49,18 @@ class ProductNameAndStarColumn extends StatelessWidget {
         SizedBox(height: Dimensions.pixels15),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            IconAndTextWidget(
+          children: [
+            const IconAndTextWidget(
               text: 'Normal',
               icon: Icons.circle_sharp,
               iconColor: AppColors.iconColor1,
             ),
             IconAndTextWidget(
-              text: '1.7 km',
+              text: location == null ? '1.7 km' : location!,
               icon: Icons.location_on,
               iconColor: AppColors.mainColor,
             ),
-            IconAndTextWidget(
+            const IconAndTextWidget(
               text: '32 min',
               icon: Icons.access_time_outlined,
               iconColor: AppColors.iconColor2,

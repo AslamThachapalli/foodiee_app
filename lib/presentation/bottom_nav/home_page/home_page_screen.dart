@@ -4,8 +4,8 @@ import '../../core/dimensions.dart';
 import '../../core/app_colors.dart';
 import '../../core/big_text.dart';
 import '../../core/small_text.dart';
-import './widgets/popular_food_view.dart';
-import './widgets/recommended_food_view.dart';
+import './widgets/popular_food_intermediary.dart';
+import './widgets/recommended_food_intermediary.dart';
 
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({Key? key}) : super(key: key);
@@ -69,9 +69,9 @@ class HomePageScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  PopularFoodView(),
+                  const PopularFoodIntermediary(),
                   SizedBox(height: Dimensions.pixels30),
-                  RecommendedFoodView(),
+                  const RecommendedFoodIntermediary(),
                 ],
               ),
             ),

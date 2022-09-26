@@ -14,41 +14,50 @@ class ProductProvider with ChangeNotifier {
   final IProductRepository _productRepository;
   ProductProvider(this._productRepository);
 
+  Either<ProductFailure, KtList<Product>> _popularProducts =
+      right(<Product>[].toImmutableList());
+  Either<ProductFailure, KtList<Product>> _recommendedProducts =
+      right(<Product>[].toImmutableList());
+
+  KtList<Product>? get popularProducts => _popularProducts.fold(
+        (_) => null,
+        (products) => products,
+      );
+
+  KtList<Product>? get recommendedProducts => _recommendedProducts.fold(
+        (_) => null,
+        (products) => products,
+      );
+
   Future<Either<ProductFailure, KtList<Product>>> fetchPopular() async {
     Stream<Either<ProductFailure, KtList<Product>>> popularStream;
     popularStream = _productRepository.fetchPopular();
 
-    Either<ProductFailure, KtList<Product>> popularProducts =
-        right(<Product>[].toImmutableList());
-
     Either<ProductFailure, KtList<Product>> failureOrSuccess;
     await for (failureOrSuccess in popularStream) {
-      popularProducts = failureOrSuccess.fold(
+      _popularProducts = failureOrSuccess.fold(
         (failure) => left(failure),
         (products) => right(products),
       );
-      return popularProducts;
+      return _popularProducts;
     }
-    return popularProducts;
+    return _popularProducts;
   }
 
   Future<Either<ProductFailure, KtList<Product>>> fetchRecommended() async {
     Stream<Either<ProductFailure, KtList<Product>>> recommendedStream;
     recommendedStream = _productRepository.fetchRecommended();
 
-    Either<ProductFailure, KtList<Product>> recommendedProducts =
-        right(<Product>[].toImmutableList());
-
     Either<ProductFailure, KtList<Product>> failureOrSuccess;
     await for (failureOrSuccess in recommendedStream) {
-      recommendedProducts = failureOrSuccess.fold(
+      _recommendedProducts = failureOrSuccess.fold(
         (failure) => left(failure),
         (products) => right(products),
       );
       notifyListeners();
-      return recommendedProducts;
+      return _recommendedProducts;
     }
-    return recommendedProducts;
+    return _recommendedProducts;
   }
 
   //The both upload methods are aimed for backend maintenance.

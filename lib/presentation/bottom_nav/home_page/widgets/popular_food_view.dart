@@ -1,16 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:foodiee_app/presentation/core/product_name_and_star_column.dart';
+import 'package:kt_dart/collection.dart';
 
+import '../../../../domain/product_fetching/product.dart';
+import '../../../core/product_name_and_star_column.dart';
 import '../../../core/dimensions.dart';
 import '../../../core/app_colors.dart';
-import '../../../core/small_text.dart';
-import '../../../core/big_text.dart';
-import '../../../core/icon_and_text_widget.dart';
+import '../../../routes/route_helper.dart';
 
 class PopularFoodView extends StatefulWidget {
-  const PopularFoodView({Key? key}) : super(key: key);
+  final KtList<Product> products;
+  const PopularFoodView(this.products, {Key? key}) : super(key: key);
 
   @override
   _PopularFoodViewState createState() => _PopularFoodViewState();
@@ -38,13 +39,13 @@ class _PopularFoodViewState extends State<PopularFoodView> {
           height: Dimensions.productViewParentContainer,
           child: PageView.builder(
               controller: pageController,
-              itemCount: 5,
+              itemCount: widget.products.size,
               itemBuilder: (context, index) {
-                return _buildFoodItem(index);
+                return popularFoodItem(index, widget.products);
               }),
         ),
         DotsIndicator(
-          dotsCount: 5,
+          dotsCount: widget.products.size,
           position: _currentPageValue,
           decorator: DotsDecorator(
             activeColor: AppColors.mainColor,
@@ -58,24 +59,39 @@ class _PopularFoodViewState extends State<PopularFoodView> {
     );
   }
 
-  Widget _buildFoodItem(int index) {
+  Widget popularFoodItem(int index, KtList<Product> products) {
+    bool hasImageUrl = products[index].imageUrl.getOrCrash() != null;
     return Stack(
       children: [
         //Image holder
-        Container(
-          height: Dimensions.productViewContainer,
-          margin: EdgeInsets.only(
-            left: Dimensions.pixels10,
-            right: Dimensions.pixels10,
-            top: Dimensions.pixels10,
-          ),
-          decoration: BoxDecoration(
+        GestureDetector(
+          onTap: () {
+            Get.toNamed(RouteHelper.getPopularFood(index));
+          },
+          child: Container(
+            height: Dimensions.productViewContainer,
+            margin: EdgeInsets.only(
+              left: Dimensions.pixels10,
+              right: Dimensions.pixels10,
+              top: Dimensions.pixels10,
+            ),
+            decoration: BoxDecoration(
               color: index.isEven ? Colors.grey : Colors.blueGrey,
               borderRadius: BorderRadius.circular(Dimensions.pixels30),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/burger.jpg'),
-              )),
+              image: hasImageUrl
+                  ? DecorationImage(
+                      fit: BoxFit.cover,
+                      image:
+                          NetworkImage(products[index].imageUrl.getOrCrash()!),
+                    )
+                  : null,
+            ),
+            child: !hasImageUrl
+                ? const Center(
+                    child: Text('No Preview Available'),
+                  )
+                : null,
+          ),
         ),
         //Product Text view container
         Align(
@@ -108,8 +124,8 @@ class _PopularFoodViewState extends State<PopularFoodView> {
             child: Padding(
               padding: EdgeInsets.all(Dimensions.pixels10),
               child: ProductNameAndStarColumn(
-                text: 'Burger And Fries',
-                stars: 5,
+                text: products[index].name.getOrCrash(),
+                stars: products[index].stars.getOrCrash().toDouble(),
               ),
             ),
           ),

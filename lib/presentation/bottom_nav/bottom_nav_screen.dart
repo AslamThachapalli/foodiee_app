@@ -27,8 +27,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-          // unselectedItemColor: Colors.grey,
-          // selectedItemColor: Colors.black,
+          showSelectedLabels: false,
           currentIndex: _currentIndex,
           onTap: (newIndex) {
             setState(() {

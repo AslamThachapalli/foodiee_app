@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../application/product_fetching/product_provider.dart';
 import '../../application/auth/auth_provider.dart';
 import './app_colors.dart';
+import '../routes/route_helper.dart';
 
 import '../bottom_nav/bottom_nav_screen.dart';
 
@@ -29,26 +30,29 @@ class MyApp extends StatelessWidget {
         title: 'Foodiee_app',
         home: BottomNavScreen(),
         theme: ThemeData.light().copyWith(
-            colorScheme: ThemeData.light().colorScheme.copyWith(
-                  secondary: AppColors.mainColor,
-                  onSecondary: Colors.white,
-                ),
-            bottomNavigationBarTheme: BottomNavigationBarThemeData().copyWith(
-              selectedItemColor: AppColors.mainColor,
-              unselectedItemColor: Colors.grey[600],
-              elevation: 5,
-            ),
-            inputDecorationTheme: InputDecorationTheme(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(25),
-                borderSide: BorderSide.none,
+          colorScheme: ThemeData.light().colorScheme.copyWith(
+                secondary: AppColors.mainColor,
+                onSecondary: Colors.white,
               ),
+          bottomNavigationBarTheme: BottomNavigationBarThemeData().copyWith(
+            selectedItemColor: AppColors.mainColor,
+            unselectedItemColor: Colors.grey[600],
+            elevation: 5,
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(25),
+              borderSide: BorderSide.none,
             ),
-            elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ElevatedButton.styleFrom(
-                primary: AppColors.mainColor,
-              ),
-            )),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              primary: AppColors.mainColor,
+            ),
+          ),
+        ),
+        initialRoute: RouteHelper.initial,
+        getPages: RouteHelper.routes,
       ),
     );
   }
