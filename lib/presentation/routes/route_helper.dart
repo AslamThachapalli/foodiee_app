@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
-import 'package:kt_dart/collection.dart';
 
-import '../../domain/product_fetching/product.dart';
 import '../bottom_nav/bottom_nav_screen.dart';
 import '../product_detail/pop_product_detail_screen.dart';
 import '../product_detail/rec_product_detail_screen.dart';

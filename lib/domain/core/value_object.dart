@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:dartz/dartz.dart';
+import 'package:uuid/uuid.dart';
 
 import './failures.dart';
 import './errror.dart';
@@ -35,6 +36,12 @@ class UniqueId extends ValueObject<String> {
   factory UniqueId(String uniqueId) {
     return UniqueId._(
       right(uniqueId),
+    );
+  }
+
+  factory UniqueId.fromUuid() {
+    return UniqueId._(
+      right(Uuid().v1()),
     );
   }
 

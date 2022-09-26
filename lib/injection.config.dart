@@ -12,14 +12,17 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i6;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'application/auth/auth_provider.dart' as _i12;
-import 'application/product_fetching/product_provider.dart' as _i11;
+import 'application/auth/auth_provider.dart' as _i14;
+import 'application/cart/data_persistence_provider.dart' as _i15;
+import 'application/product_fetching/product_provider.dart' as _i13;
 import 'domain/auth/i_auth_facade.dart' as _i7;
-import 'domain/product_fetching/i_product_repository.dart' as _i9;
+import 'domain/cart/i_data_persistence_repo.dart' as _i9;
+import 'domain/product_fetching/i_product_repository.dart' as _i11;
 import 'infrastructure/auth/firebase_auth_facade.dart' as _i8;
-import 'infrastructure/core/firebase_injectable_module.dart' as _i13;
+import 'infrastructure/cart/data_persistence_repo.dart' as _i10;
+import 'infrastructure/core/firebase_injectable_module.dart' as _i16;
 import 'infrastructure/product_fetching/product_repository.dart'
-    as _i10; // ignore_for_file: unnecessary_lambdas
+    as _i12; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -37,13 +40,16 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => firebaseInjectableModule.googleSignIn);
   gh.lazySingleton<_i7.IAuthFacade>(() =>
       _i8.FirebaseAuthFacade(get<_i3.FirebaseAuth>(), get<_i6.GoogleSignIn>()));
-  gh.lazySingleton<_i9.IProductRepository>(() => _i10.ProductRepository(
+  gh.lazySingleton<_i9.IDataPersistence>(() => _i10.DataPersistence());
+  gh.lazySingleton<_i11.IProductRepository>(() => _i12.ProductRepository(
       get<_i4.FirebaseFirestore>(), get<_i5.FirebaseStorage>()));
-  gh.factory<_i11.ProductProvider>(
-      () => _i11.ProductProvider(get<_i9.IProductRepository>()));
-  gh.factory<_i12.AuthProvider>(
-      () => _i12.AuthProvider(get<_i7.IAuthFacade>()));
+  gh.factory<_i13.ProductProvider>(
+      () => _i13.ProductProvider(get<_i11.IProductRepository>()));
+  gh.factory<_i14.AuthProvider>(
+      () => _i14.AuthProvider(get<_i7.IAuthFacade>()));
+  gh.factory<_i15.DataPersistenceProvider>(
+      () => _i15.DataPersistenceProvider(get<_i9.IDataPersistence>()));
   return get;
 }
 
-class _$FirebaseInjectableModule extends _i13.FirebaseInjectableModule {}
+class _$FirebaseInjectableModule extends _i16.FirebaseInjectableModule {}

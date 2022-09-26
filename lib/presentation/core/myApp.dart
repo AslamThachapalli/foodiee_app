@@ -3,6 +3,7 @@ import 'package:foodiee_app/injection.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get.dart';
 
+import '../../application/cart/data_persistence_provider.dart';
 import '../../application/product_fetching/product_provider.dart';
 import '../../application/auth/auth_provider.dart';
 import './app_colors.dart';
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => getIt<AuthProvider>(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => getIt<DataPersistenceProvider>(),
         ),
       ],
       child: GetMaterialApp(
