@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:kt_dart/collection.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../application/cart/cart_provider.dart';
 import '../../../../domain/product_fetching/product.dart';
 import '../../../core/product_name_and_star_column.dart';
 import '../../../core/dimensions.dart';
@@ -41,7 +43,7 @@ class _PopularFoodViewState extends State<PopularFoodView> {
               controller: pageController,
               itemCount: widget.products.size,
               itemBuilder: (context, index) {
-                return popularFoodItem(index, widget.products);
+                return _popularFoodItem(index, widget.products);
               }),
         ),
         DotsIndicator(
@@ -51,21 +53,21 @@ class _PopularFoodViewState extends State<PopularFoodView> {
             activeColor: AppColors.mainColor,
             size: const Size.square(9.0),
             activeSize: const Size(18.0, 9.0),
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
+            activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
           ),
         ),
       ],
     );
   }
 
-  Widget popularFoodItem(int index, KtList<Product> products) {
+  Widget _popularFoodItem(int index, KtList<Product> products) {
     bool hasImageUrl = products[index].imageUrl.getOrCrash() != null;
     return Stack(
       children: [
         //Image holder
         GestureDetector(
           onTap: () {
+            Provider.of<CartProvider>(context, listen: false).productDetailPageOpened();
             Get.toNamed(RouteHelper.getPopularFood(index));
           },
           child: Container(
@@ -81,8 +83,7 @@ class _PopularFoodViewState extends State<PopularFoodView> {
               image: hasImageUrl
                   ? DecorationImage(
                       fit: BoxFit.cover,
-                      image:
-                          NetworkImage(products[index].imageUrl.getOrCrash()!),
+                      image: NetworkImage(products[index].imageUrl.getOrCrash()!),
                     )
                   : null,
             ),
@@ -103,24 +104,21 @@ class _PopularFoodViewState extends State<PopularFoodView> {
               right: Dimensions.pixels30,
               bottom: Dimensions.pixels20,
             ),
-            decoration: BoxDecoration(
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(Dimensions.pixels20), boxShadow: const [
+              BoxShadow(
+                color: Color(0xFFe8e8e8),
+                blurRadius: 5,
+                offset: Offset(0, 5),
+              ),
+              BoxShadow(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(Dimensions.pixels20),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0xFFe8e8e8),
-                    blurRadius: 5,
-                    offset: Offset(0, 5),
-                  ),
-                  BoxShadow(
-                    color: Colors.white,
-                    offset: Offset(5, 0),
-                  ),
-                  BoxShadow(
-                    color: Colors.white,
-                    offset: Offset(-5, 0),
-                  ),
-                ]),
+                offset: Offset(5, 0),
+              ),
+              BoxShadow(
+                color: Colors.white,
+                offset: Offset(-5, 0),
+              ),
+            ]),
             child: Padding(
               padding: EdgeInsets.all(Dimensions.pixels10),
               child: ProductNameAndStarColumn(

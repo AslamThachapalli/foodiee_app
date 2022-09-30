@@ -43,9 +43,12 @@ dependencies:
   firebase_auth: ^3.8.0
   cloud_firestore: ^3.4.7
   firebase_storage: ^10.3.8
+  sqflite: ^2.0.3+1
+  path: ^1.8.1
   kt_dart: ^0.10.0
   dots_indicator: ^2.1.0
   uuid: 3.0.6
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

@@ -27,4 +27,9 @@ class DataPersistence implements IDataPersistence {
   int productCount(UniqueId productId) {
     return box.read(productId.getOrCrash()) ?? 0;
   }
+
+  @override
+  Option eraseCount(UniqueId productId) {
+    return some(box.remove(productId.getOrCrash()));
+  }
 }

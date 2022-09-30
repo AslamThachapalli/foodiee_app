@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:foodiee_app/injection.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get.dart';
 
+import '../../application/cart/cart_provider.dart';
 import '../../application/cart/data_persistence_provider.dart';
 import '../../application/product_fetching/product_provider.dart';
 import '../../application/auth/auth_provider.dart';
+import '../../injection.dart';
 import './app_colors.dart';
 import '../routes/route_helper.dart';
 
@@ -28,11 +29,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => getIt<DataPersistenceProvider>(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => getIt<CartProvider>(),
+        ),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Foodiee_app',
-        home: BottomNavScreen(),
         theme: ThemeData.light().copyWith(
           colorScheme: ThemeData.light().colorScheme.copyWith(
                 secondary: AppColors.mainColor,

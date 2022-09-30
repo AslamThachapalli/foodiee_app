@@ -54,7 +54,6 @@ class ProductProvider with ChangeNotifier {
         (failure) => left(failure),
         (products) => right(products),
       );
-      notifyListeners();
       return _recommendedProducts;
     }
     return _recommendedProducts;

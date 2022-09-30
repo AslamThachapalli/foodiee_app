@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:kt_dart/kt.dart';
 
+import '../../../../application/cart/cart_provider.dart';
 import '../../../../domain/product_fetching/product.dart';
 import '../../../core/app_colors.dart';
 import '../../../core/icon_and_text_widget.dart';
@@ -46,6 +48,7 @@ class RecommendedFoodView extends StatelessWidget {
               bool hasImageUrl = products[index].imageUrl.getOrCrash() != null;
               return GestureDetector(
                 onTap: () {
+                  Provider.of<CartProvider>(context, listen: false).productDetailPageOpened();
                   Get.toNamed(RouteHelper.getRecommendedFood(index));
                 },
                 child: Container(
@@ -61,13 +64,11 @@ class RecommendedFoodView extends StatelessWidget {
                         height: Dimensions.recProductImgViewSize,
                         decoration: BoxDecoration(
                           color: Colors.white54,
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.pixels20),
+                          borderRadius: BorderRadius.circular(Dimensions.pixels20),
                           image: hasImageUrl
                               ? DecorationImage(
                                   fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                      products[index].imageUrl.getOrCrash()!),
+                                  image: NetworkImage(products[index].imageUrl.getOrCrash()!),
                                 )
                               : null,
                         ),
@@ -81,8 +82,7 @@ class RecommendedFoodView extends StatelessWidget {
                       Expanded(
                         child: Container(
                           height: Dimensions.recProductViewContainer,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: Dimensions.pixels5),
+                          padding: EdgeInsets.symmetric(horizontal: Dimensions.pixels5),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
@@ -99,8 +99,7 @@ class RecommendedFoodView extends StatelessWidget {
                               SmallText(text: 'With Indian Characteristics'),
                               SizedBox(height: Dimensions.pixels15),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: const [
                                   IconAndTextWidget(
                                     text: 'Normal',
