@@ -46,9 +46,7 @@ class AuthProvider with ChangeNotifier {
     isAuthenticated: false,
   );
 
-  AuthState get authState {
-    return _authState;
-  }
+  AuthState get authState => _authState;
 
   void emailChanged(String emailStr) {
     _authState.emailAddress = EmailAddress(emailStr);
@@ -77,10 +75,7 @@ class AuthProvider with ChangeNotifier {
     final isPhoneNumberValid = _authState.phoneNumber.value.isRight();
     final isUserNameValid = _authState.userName.value.isRight();
 
-    if (isEmailValid &&
-        isPasswordValid &&
-        isPhoneNumberValid &&
-        isUserNameValid) {
+    if (isEmailValid && isPasswordValid && isPhoneNumberValid && isUserNameValid) {
       _authState.isSubmitting = true;
 
       failureOrSuccess = await _authFacade.signInWithEmailAndPassword(
@@ -105,10 +100,7 @@ class AuthProvider with ChangeNotifier {
     // print(_authState.emailAddress.value);
     // print(_authState.password.value);
 
-    if (isEmailValid &&
-        isPasswordValid &&
-        isPhoneNumberValid &&
-        isUserNameValid) {
+    if (isEmailValid && isPasswordValid && isPhoneNumberValid && isUserNameValid) {
       _authState.isSubmitting = true;
 
       failureOrSuccess = await _authFacade.registerWithEmailAndPassword(
