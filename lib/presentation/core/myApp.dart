@@ -6,6 +6,9 @@ import '../../application/cart/cart_provider.dart';
 import '../../application/cart/data_persistence_provider.dart';
 import '../../application/product_fetching/product_provider.dart';
 import '../../application/auth/auth_provider.dart';
+import '../../application/navigation_guide/navigation_guide_provider.dart';
+import '../../application/user_detail/user_detail_provider.dart';
+import '../../application/location/location_provider.dart';
 import '../../injection.dart';
 import './app_colors.dart';
 import '../routes/route_helper.dart';
@@ -24,13 +27,24 @@ class MyApp extends StatelessWidget {
           create: (context) => getIt<ProductProvider>(),
         ),
         ChangeNotifierProvider(
-          create: (context) => getIt<AuthProvider>(),
+          create: (context) => getIt<AuthProvider>()..authCheckRequested(),
         ),
         ChangeNotifierProvider(
           create: (context) => getIt<DataPersistenceProvider>(),
         ),
         ChangeNotifierProvider(
           create: (context) => getIt<CartProvider>(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => getIt<NavigationGuideProvider>(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => getIt<UserDetailProvider>(),
+        ),
+        ChangeNotifierProxyProvider<UserDetailProvider, LocationProvider>(
+          create: (context) => getIt<LocationProvider>(),
+          update: (_, userDetailProvider, locationProvider) =>
+              getIt<LocationProvider>()..update(userDetailProvider.address),
         ),
       ],
       child: GetMaterialApp(
@@ -46,18 +60,13 @@ class MyApp extends StatelessWidget {
             unselectedItemColor: Colors.grey[600],
             elevation: 5,
           ),
-          inputDecorationTheme: InputDecorationTheme(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(25),
-              borderSide: BorderSide.none,
-            ),
-          ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
               primary: AppColors.mainColor,
             ),
           ),
         ),
+        home: const BottomNavScreen(),
         initialRoute: RouteHelper.initial,
         getPages: RouteHelper.routes,
       ),

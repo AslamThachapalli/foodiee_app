@@ -11,7 +11,8 @@ import './widgets/sign_in_button.dart';
 import './widgets/sign_in_welcome_widget.dart';
 
 class AuthScreen extends StatefulWidget {
-  const AuthScreen({Key? key}) : super(key: key);
+  final bool isFromCart;
+  const AuthScreen({Key? key, this.isFromCart = false}) : super(key: key);
 
   @override
   State<AuthScreen> createState() => _AuthScreenState();
@@ -125,6 +126,7 @@ class _AuthScreenState extends State<AuthScreen> {
               SignInButton(
                 isRegistered: isRegistered,
                 authProvider: authProvider,
+                isFromCart: widget.isFromCart,
               ),
               SizedBox(height: Dimensions.pixels15),
 
@@ -179,7 +181,10 @@ class _AuthScreenState extends State<AuthScreen> {
               SizedBox(height: Dimensions.pixels20),
 
               //Google SignIn
-              const GoogleSignInWidget(),
+              GoogleSignInWidget(
+                authProvider: authProvider,
+                isFromCart: widget.isFromCart,
+              ),
               SizedBox(height: Dimensions.pixels10)
             ],
           ),

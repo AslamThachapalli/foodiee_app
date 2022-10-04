@@ -49,6 +49,9 @@ dependencies:
   dots_indicator: ^2.1.0
   uuid: 3.0.6
   intl: ^0.17.0
+  location: ^4.4.0
+  http: ^0.13.5
+  flutter_map: ^2.2.0
 
 dev_dependencies:
   flutter_test:

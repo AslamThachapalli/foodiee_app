@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:foodiee_app/presentation/routes/route_helper.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../../application/auth/auth_provider.dart';
@@ -10,29 +12,32 @@ import '../../core/dimensions.dart';
 class SignInButton extends StatelessWidget {
   final bool isRegistered;
   final AuthProvider authProvider;
+  final bool isFromCart;
   const SignInButton({
     Key? key,
     required this.isRegistered,
     required this.authProvider,
+    required this.isFromCart,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         isRegistered
-            ? Provider.of<AuthProvider>(context, listen: false).signInWithEmailAndPasswordPressed()
-            : Provider.of<AuthProvider>(context, listen: false)
+            ? await Provider.of<AuthProvider>(context, listen: false)
+                .signInWithEmailAndPasswordPressed()
+            : await Provider.of<AuthProvider>(context, listen: false)
                 .registerWithEmailAndPasswordPressed();
 
         SnackBar snackBar(AuthFailure failure) {
           return SnackBar(
-              content: failure.map(
+              content: failure.maybeMap(
             serverError: (_) => const Text('Server Error'),
-            cancelledByUser: (_) => const Text('Cancelled'),
             invalidEmailAndPasswordCombination: (_) =>
                 const Text('Invalid Email And Password Combination'),
             emailAlreadyInUse: (_) => const Text('Email Already Exists'),
+            orElse: () => const SizedBox.shrink(),
           ));
         }
 
@@ -40,11 +45,9 @@ class SignInButton extends StatelessWidget {
           () => const SizedBox.shrink(),
           (either) => either.fold(
             (failure) => ScaffoldMessenger.of(context).showSnackBar(snackBar(failure)),
-            //if auth is success navigate, and
-            //set authstate.isAuthenticated to true.
-            (_) => ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('success')),
-            ),
+            (_) {
+              isFromCart ? Get.back() : Get.toNamed(RouteHelper.initial);
+            },
           ),
         );
       },

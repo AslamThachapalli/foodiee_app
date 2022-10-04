@@ -1,17 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:foodiee_app/presentation/routes/route_helper.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 import '../../../application/auth/auth_provider.dart';
+import '../../../domain/auth/auth_failure.dart';
 import '../../core/dimensions.dart';
 
 class GoogleSignInWidget extends StatelessWidget {
-  const GoogleSignInWidget({Key? key}) : super(key: key);
+  final bool isFromCart;
+  final AuthProvider authProvider;
+  const GoogleSignInWidget({
+    Key? key,
+    required this.isFromCart,
+    required this.authProvider,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Provider.of<AuthProvider>(context, listen: false).signInWithGooglePressed();
+      onTap: () async {
+        await Provider.of<AuthProvider>(context, listen: false).signInWithGooglePressed();
+
+        SnackBar snackBar(AuthFailure failure) {
+          return SnackBar(
+              content: failure.maybeMap(
+            cancelledByUser: (_) => const Text('Cancelled'),
+            orElse: () => const SizedBox.shrink(),
+          ));
+        }
+
+        authProvider.authState.authFailureOrSuccessOption.fold(
+          () => const SizedBox.shrink(),
+          (either) => either.fold(
+            (failure) => ScaffoldMessenger.of(context).showSnackBar(snackBar(failure)),
+            (_) {
+              isFromCart ? Get.back() : Get.toNamed(RouteHelper.initial);
+            },
+          ),
+        );
       },
       child: Container(
         height: MediaQuery.of(context).size.height * 0.065,

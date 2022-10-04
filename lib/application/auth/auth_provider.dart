@@ -72,10 +72,10 @@ class AuthProvider with ChangeNotifier {
     Either<AuthFailure, Unit>? failureOrSuccess;
     final isEmailValid = _authState.emailAddress.value.isRight();
     final isPasswordValid = _authState.password.value.isRight();
-    final isPhoneNumberValid = _authState.phoneNumber.value.isRight();
-    final isUserNameValid = _authState.userName.value.isRight();
+    // final isPhoneNumberValid = _authState.phoneNumber.value.isRight();
+    // final isUserNameValid = _authState.userName.value.isRight();
 
-    if (isEmailValid && isPasswordValid && isPhoneNumberValid && isUserNameValid) {
+    if (isEmailValid && isPasswordValid) {
       _authState.isSubmitting = true;
 
       failureOrSuccess = await _authFacade.signInWithEmailAndPassword(
@@ -86,6 +86,17 @@ class AuthProvider with ChangeNotifier {
     _authState.isSubmitting = false;
     _authState.showErrorMessages = true;
     _authState.authFailureOrSuccessOption = optionOf(failureOrSuccess);
+    _authState.authFailureOrSuccessOption.fold(
+      () => null,
+      (either) => either.fold(
+        (f) {
+          _authState.isAuthenticated = false;
+        },
+        (s) {
+          _authState.isAuthenticated = true;
+        },
+      ),
+    );
 
     notifyListeners();
   }
@@ -106,11 +117,24 @@ class AuthProvider with ChangeNotifier {
       failureOrSuccess = await _authFacade.registerWithEmailAndPassword(
         emailAddress: _authState.emailAddress,
         password: _authState.password,
+        phoneNumber: _authState.phoneNumber,
+        userName: _authState.userName,
       );
     }
     _authState.isSubmitting = false;
     _authState.showErrorMessages = true;
     _authState.authFailureOrSuccessOption = optionOf(failureOrSuccess);
+    _authState.authFailureOrSuccessOption.fold(
+      () => null,
+      (either) => either.fold(
+        (f) {
+          _authState.isAuthenticated = false;
+        },
+        (s) {
+          _authState.isAuthenticated = true;
+        },
+      ),
+    );
 
     notifyListeners();
   }
@@ -118,11 +142,23 @@ class AuthProvider with ChangeNotifier {
   Future<void> signInWithGooglePressed() async {
     Either<AuthFailure, Unit>? failureOrSuccess;
     _authState.isSubmitting = true;
+    print('authenticating');
 
     failureOrSuccess = await _authFacade.signInWithGoogle();
-
+    print('after failureOrSuccess: $failureOrSuccess');
     _authState.isSubmitting = false;
     _authState.authFailureOrSuccessOption = optionOf(failureOrSuccess);
+    _authState.authFailureOrSuccessOption.fold(
+      () => null,
+      (either) => either.fold(
+        (f) {
+          _authState.isAuthenticated = false;
+        },
+        (s) {
+          _authState.isAuthenticated = true;
+        },
+      ),
+    );
 
     notifyListeners();
   }

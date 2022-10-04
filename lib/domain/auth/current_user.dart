@@ -1,6 +1,5 @@
+import 'package:foodiee_app/domain/core/value_object.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../core/value_object.dart';
 
 part 'current_user.freezed.dart';
 
