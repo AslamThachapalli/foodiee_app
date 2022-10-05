@@ -65,7 +65,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
           get<_i4.FirebaseFirestore>(), get<_i3.FirebaseAuth>()));
   gh.lazySingleton<_i17.IProductRepository>(() => _i18.ProductRepository(
       get<_i4.FirebaseFirestore>(), get<_i5.FirebaseStorage>()));
-  gh.lazySingleton<_i19.ISaveLocationRepo>(() => _i20.SaveLocationRepository());
+  gh.lazySingleton<_i19.ISaveLocationRepo>(() => _i20.SaveLocationRepository(
+      get<_i4.FirebaseFirestore>(), get<_i3.FirebaseAuth>()));
   gh.lazySingleton<_i21.IUserDetailRepo>(() => _i22.UserDetailRepository(
       get<_i4.FirebaseFirestore>(), get<_i3.FirebaseAuth>()));
   gh.factory<_i23.LocationProvider>(() => _i23.LocationProvider(
