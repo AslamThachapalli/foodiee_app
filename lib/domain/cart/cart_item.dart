@@ -14,6 +14,5 @@ class CartItem with _$CartItem {
     required ImageUrl imageUrl,
     required Price price,
     required Quantity quantity,
-    required bool isExist,
   }) = _CartItem;
 }

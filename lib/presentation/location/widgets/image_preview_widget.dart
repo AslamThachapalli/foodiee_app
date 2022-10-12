@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../../application/location/location_provider.dart';
 import '../../core/app_colors.dart';
@@ -8,18 +9,21 @@ import '../../routes/route_helper.dart';
 
 class ImagePreviewWidget extends StatelessWidget {
   final LocationProvider locationProvider;
+  final String addressKey;
   const ImagePreviewWidget({
     Key? key,
     required this.locationProvider,
+    required this.addressKey,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        await Provider.of<LocationProvider>(context, listen: false).getLocationCoordinates();
         Get.toNamed(RouteHelper.getMapScreen(), arguments: [
-          locationProvider.locationData,
-          key,
+          addressKey,
+          false,
         ]);
       },
       child: Container(
@@ -34,9 +38,9 @@ class ImagePreviewWidget extends StatelessWidget {
             width: 2,
           ),
         ),
-        child: locationProvider.previewImageUrl[key] != null
+        child: locationProvider.previewImageUrl[addressKey] != null
             ? Image.network(
-                locationProvider.previewImageUrl[key]!,
+                locationProvider.previewImageUrl[addressKey]!,
                 fit: BoxFit.cover,
               )
             : const Center(

@@ -6,14 +6,14 @@ import 'package:kt_dart/collection.dart';
 import '../../../../application/product_fetching/product_provider.dart';
 import '../../../../domain/product_fetching/product.dart';
 import '../../../../domain/product_fetching/product_failure.dart';
+import '../../../core/error_page.dart';
 import './popular_food_view.dart';
 
 class PopularFoodIntermediary extends StatefulWidget {
   const PopularFoodIntermediary({Key? key}) : super(key: key);
 
   @override
-  State<PopularFoodIntermediary> createState() =>
-      _PopularFoodIntermediaryState();
+  State<PopularFoodIntermediary> createState() => _PopularFoodIntermediaryState();
 }
 
 class _PopularFoodIntermediaryState extends State<PopularFoodIntermediary> {
@@ -32,8 +32,7 @@ class _PopularFoodIntermediaryState extends State<PopularFoodIntermediary> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (fetchingPopular) {
-      fetchPopular =
-          Provider.of<ProductProvider>(context, listen: false).fetchPopular();
+      fetchPopular = Provider.of<ProductProvider>(context, listen: false).fetchPopular();
       fetchingPopular = false;
     }
   }
@@ -52,17 +51,11 @@ class _PopularFoodIntermediaryState extends State<PopularFoodIntermediary> {
                 snapshot.data as dartz.Either<ProductFailure, KtList<Product>>;
             return popularProducts.fold(
               (failure) => failure.map(
-                unexpected: (_) => const Center(
-                  child: Text(
-                    'An Unexpected Error Occured.\nPlease Contact Support.',
-                    textAlign: TextAlign.center,
-                  ),
+                unexpected: (_) => const ErrorPage(
+                  errorType: 'An Unexpected Error Occurred.\nPlease Contact Support.',
                 ),
-                serverError: (_) => const Center(
-                  child: Text(
-                    'Server Error.\nPlease Try After Sometime.',
-                    textAlign: TextAlign.center,
-                  ),
+                serverError: (_) => const ErrorPage(
+                  errorType: 'Server Error.\nPlease Try After Sometime.',
                 ),
               ),
               (products) => PopularFoodView(products),

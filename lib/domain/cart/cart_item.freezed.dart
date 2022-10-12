@@ -21,7 +21,6 @@ mixin _$CartItem {
   ImageUrl get imageUrl => throw _privateConstructorUsedError;
   Price get price => throw _privateConstructorUsedError;
   Quantity get quantity => throw _privateConstructorUsedError;
-  bool get isExist => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CartItemCopyWith<CartItem> get copyWith =>
@@ -37,8 +36,7 @@ abstract class $CartItemCopyWith<$Res> {
       ProductName name,
       ImageUrl imageUrl,
       Price price,
-      Quantity quantity,
-      bool isExist});
+      Quantity quantity});
 }
 
 /// @nodoc
@@ -56,7 +54,6 @@ class _$CartItemCopyWithImpl<$Res> implements $CartItemCopyWith<$Res> {
     Object? imageUrl = freezed,
     Object? price = freezed,
     Object? quantity = freezed,
-    Object? isExist = freezed,
   }) {
     return _then(_value.copyWith(
       productId: productId == freezed
@@ -79,10 +76,6 @@ class _$CartItemCopyWithImpl<$Res> implements $CartItemCopyWith<$Res> {
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as Quantity,
-      isExist: isExist == freezed
-          ? _value.isExist
-          : isExist // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -98,8 +91,7 @@ abstract class _$$_CartItemCopyWith<$Res> implements $CartItemCopyWith<$Res> {
       ProductName name,
       ImageUrl imageUrl,
       Price price,
-      Quantity quantity,
-      bool isExist});
+      Quantity quantity});
 }
 
 /// @nodoc
@@ -119,7 +111,6 @@ class __$$_CartItemCopyWithImpl<$Res> extends _$CartItemCopyWithImpl<$Res>
     Object? imageUrl = freezed,
     Object? price = freezed,
     Object? quantity = freezed,
-    Object? isExist = freezed,
   }) {
     return _then(_$_CartItem(
       productId: productId == freezed
@@ -142,10 +133,6 @@ class __$$_CartItemCopyWithImpl<$Res> extends _$CartItemCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as Quantity,
-      isExist: isExist == freezed
-          ? _value.isExist
-          : isExist // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -158,8 +145,7 @@ class _$_CartItem implements _CartItem {
       required this.name,
       required this.imageUrl,
       required this.price,
-      required this.quantity,
-      required this.isExist});
+      required this.quantity});
 
   @override
   final UniqueId productId;
@@ -171,12 +157,10 @@ class _$_CartItem implements _CartItem {
   final Price price;
   @override
   final Quantity quantity;
-  @override
-  final bool isExist;
 
   @override
   String toString() {
-    return 'CartItem(productId: $productId, name: $name, imageUrl: $imageUrl, price: $price, quantity: $quantity, isExist: $isExist)';
+    return 'CartItem(productId: $productId, name: $name, imageUrl: $imageUrl, price: $price, quantity: $quantity)';
   }
 
   @override
@@ -188,8 +172,7 @@ class _$_CartItem implements _CartItem {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.imageUrl, imageUrl) &&
             const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.quantity, quantity) &&
-            const DeepCollectionEquality().equals(other.isExist, isExist));
+            const DeepCollectionEquality().equals(other.quantity, quantity));
   }
 
   @override
@@ -199,8 +182,7 @@ class _$_CartItem implements _CartItem {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(imageUrl),
       const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(quantity),
-      const DeepCollectionEquality().hash(isExist));
+      const DeepCollectionEquality().hash(quantity));
 
   @JsonKey(ignore: true)
   @override
@@ -214,8 +196,7 @@ abstract class _CartItem implements CartItem {
       required final ProductName name,
       required final ImageUrl imageUrl,
       required final Price price,
-      required final Quantity quantity,
-      required final bool isExist}) = _$_CartItem;
+      required final Quantity quantity}) = _$_CartItem;
 
   @override
   UniqueId get productId;
@@ -227,8 +208,6 @@ abstract class _CartItem implements CartItem {
   Price get price;
   @override
   Quantity get quantity;
-  @override
-  bool get isExist;
   @override
   @JsonKey(ignore: true)
   _$$_CartItemCopyWith<_$_CartItem> get copyWith =>

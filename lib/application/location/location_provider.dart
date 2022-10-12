@@ -61,7 +61,7 @@ class LocationProvider with ChangeNotifier {
         longitude: value.longitude!.getOrCrash()!,
       );
     });
-    notifyListeners();
+    // notifyListeners();
   }
 
   //Used to toggle between address types.
@@ -91,17 +91,21 @@ class LocationProvider with ChangeNotifier {
       key: key,
       address: address,
     );
-    notifyListeners();
     saveOption.fold(
       () => null,
       id,
     );
+    notifyListeners();
   }
 
   void updatePreviewImage({
     required String key,
     required AddressModel addressModel,
   }) {
+    if (addressModel.latitude?.getOrCrash() == null ||
+        addressModel.longitude?.getOrCrash() == null) {
+      return;
+    }
     String previewUrl = _mapboxRepository.getLocationPreviewImage(
       latitude: addressModel.latitude!.getOrCrash()!,
       longitude: addressModel.longitude!.getOrCrash()!,

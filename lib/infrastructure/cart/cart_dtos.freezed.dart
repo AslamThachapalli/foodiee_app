@@ -23,7 +23,6 @@ mixin _$CartDto {
   String get cartId => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
   int get amount => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
   List<CartItemDto>? get cartItems => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
 
@@ -40,7 +39,7 @@ abstract class $CartDtoCopyWith<$Res> {
       {String cartId,
       int quantity,
       int amount,
-      @JsonKey(ignore: true) List<CartItemDto>? cartItems,
+      List<CartItemDto>? cartItems,
       String createdAt});
 }
 
@@ -95,7 +94,7 @@ abstract class _$$_CartDtoCopyWith<$Res> implements $CartDtoCopyWith<$Res> {
       {String cartId,
       int quantity,
       int amount,
-      @JsonKey(ignore: true) List<CartItemDto>? cartItems,
+      List<CartItemDto>? cartItems,
       String createdAt});
 }
 
@@ -149,7 +148,7 @@ class _$_CartDto extends _CartDto {
       {required this.cartId,
       required this.quantity,
       required this.amount,
-      @JsonKey(ignore: true) final List<CartItemDto>? cartItems,
+      required final List<CartItemDto>? cartItems,
       required this.createdAt})
       : _cartItems = cartItems,
         super._();
@@ -165,7 +164,6 @@ class _$_CartDto extends _CartDto {
   final int amount;
   final List<CartItemDto>? _cartItems;
   @override
-  @JsonKey(ignore: true)
   List<CartItemDto>? get cartItems {
     final value = _cartItems;
     if (value == null) return null;
@@ -222,7 +220,7 @@ abstract class _CartDto extends CartDto {
       {required final String cartId,
       required final int quantity,
       required final int amount,
-      @JsonKey(ignore: true) final List<CartItemDto>? cartItems,
+      required final List<CartItemDto>? cartItems,
       required final String createdAt}) = _$_CartDto;
   const _CartDto._() : super._();
 
@@ -235,7 +233,6 @@ abstract class _CartDto extends CartDto {
   @override
   int get amount;
   @override
-  @JsonKey(ignore: true)
   List<CartItemDto>? get cartItems;
   @override
   String get createdAt;
@@ -256,7 +253,6 @@ mixin _$CartItemDto {
   String get imageUrl => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
-  int get isExist => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -274,8 +270,7 @@ abstract class $CartItemDtoCopyWith<$Res> {
       String name,
       String imageUrl,
       int price,
-      int quantity,
-      int isExist});
+      int quantity});
 }
 
 /// @nodoc
@@ -293,7 +288,6 @@ class _$CartItemDtoCopyWithImpl<$Res> implements $CartItemDtoCopyWith<$Res> {
     Object? imageUrl = freezed,
     Object? price = freezed,
     Object? quantity = freezed,
-    Object? isExist = freezed,
   }) {
     return _then(_value.copyWith(
       productId: productId == freezed
@@ -316,10 +310,6 @@ class _$CartItemDtoCopyWithImpl<$Res> implements $CartItemDtoCopyWith<$Res> {
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      isExist: isExist == freezed
-          ? _value.isExist
-          : isExist // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -336,8 +326,7 @@ abstract class _$$_CartItemDtoCopyWith<$Res>
       String name,
       String imageUrl,
       int price,
-      int quantity,
-      int isExist});
+      int quantity});
 }
 
 /// @nodoc
@@ -357,7 +346,6 @@ class __$$_CartItemDtoCopyWithImpl<$Res> extends _$CartItemDtoCopyWithImpl<$Res>
     Object? imageUrl = freezed,
     Object? price = freezed,
     Object? quantity = freezed,
-    Object? isExist = freezed,
   }) {
     return _then(_$_CartItemDto(
       productId: productId == freezed
@@ -380,10 +368,6 @@ class __$$_CartItemDtoCopyWithImpl<$Res> extends _$CartItemDtoCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      isExist: isExist == freezed
-          ? _value.isExist
-          : isExist // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -396,8 +380,7 @@ class _$_CartItemDto extends _CartItemDto {
       required this.name,
       required this.imageUrl,
       required this.price,
-      required this.quantity,
-      required this.isExist})
+      required this.quantity})
       : super._();
 
   factory _$_CartItemDto.fromJson(Map<String, dynamic> json) =>
@@ -413,12 +396,10 @@ class _$_CartItemDto extends _CartItemDto {
   final int price;
   @override
   final int quantity;
-  @override
-  final int isExist;
 
   @override
   String toString() {
-    return 'CartItemDto(productId: $productId, name: $name, imageUrl: $imageUrl, price: $price, quantity: $quantity, isExist: $isExist)';
+    return 'CartItemDto(productId: $productId, name: $name, imageUrl: $imageUrl, price: $price, quantity: $quantity)';
   }
 
   @override
@@ -430,8 +411,7 @@ class _$_CartItemDto extends _CartItemDto {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.imageUrl, imageUrl) &&
             const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.quantity, quantity) &&
-            const DeepCollectionEquality().equals(other.isExist, isExist));
+            const DeepCollectionEquality().equals(other.quantity, quantity));
   }
 
   @JsonKey(ignore: true)
@@ -442,8 +422,7 @@ class _$_CartItemDto extends _CartItemDto {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(imageUrl),
       const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(quantity),
-      const DeepCollectionEquality().hash(isExist));
+      const DeepCollectionEquality().hash(quantity));
 
   @JsonKey(ignore: true)
   @override
@@ -464,8 +443,7 @@ abstract class _CartItemDto extends CartItemDto {
       required final String name,
       required final String imageUrl,
       required final int price,
-      required final int quantity,
-      required final int isExist}) = _$_CartItemDto;
+      required final int quantity}) = _$_CartItemDto;
   const _CartItemDto._() : super._();
 
   factory _CartItemDto.fromJson(Map<String, dynamic> json) =
@@ -481,8 +459,6 @@ abstract class _CartItemDto extends CartItemDto {
   int get price;
   @override
   int get quantity;
-  @override
-  int get isExist;
   @override
   @JsonKey(ignore: true)
   _$$_CartItemDtoCopyWith<_$_CartItemDto> get copyWith =>

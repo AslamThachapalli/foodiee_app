@@ -24,9 +24,9 @@ class MapWidget extends StatelessWidget {
           locationData.longitude!,
         ),
         onTap: (_, position) async {
+          locationProvider.updatePickedLocation(position);
           await locationProvider.displayAddressOnMap(
               latitude: position.latitude, longitude: position.longitude);
-          locationProvider.updatePickedLocation(position);
         },
         zoom: 13,
       ),

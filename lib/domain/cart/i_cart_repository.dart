@@ -12,6 +12,12 @@ abstract class ICartRepository {
   Future<Option<int>> getCartCount();
   Future<Option<Cart>> getCart();
   Future<Cart> addToCart({UniqueId? cartId, CreatedAt? createdAt, required CartItem cartItem});
-  Future<Cart> updateCart({required UniqueId productId, required Quantity quantity, required Price price, required bool isIncrementing});
+  Future<Cart> updateCart(
+      {required UniqueId productId,
+      required Quantity quantity,
+      required Price price,
+      required bool isIncrementing});
   Future<Option<Cart>> deleteFromCart(UniqueId productId, Price price);
+  Future<Unit> deleteCart();
+  Future<Cart> addCart(Cart cart);
 }

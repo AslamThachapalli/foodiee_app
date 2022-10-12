@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 import '../../../application/location/location_provider.dart';
+import '../../../application/cart/cart_provider.dart';
+import '../../../application/user_detail/user_detail_provider.dart';
 import '../../core/app_colors.dart';
 import '../../core/dimensions.dart';
 import '../../core/small_text.dart';
+import '../../routes/route_helper.dart';
 
 class BottomNavBarWidget extends StatelessWidget {
   final bool isPaying;
@@ -28,32 +32,38 @@ class BottomNavBarWidget extends StatelessWidget {
         ),
       ),
       child: Center(
-        child: Consumer<LocationProvider>(
-          builder: (context, locationConsumer, _) {
+        child: Consumer3<LocationProvider, UserDetailProvider, CartProvider>(
+          builder: (context, locationConsumer, userDetailProvider, cartProvider, _) {
             int selectedIndex = locationConsumer.index;
-            String key = selectedIndex == 0
+            String addressKey = selectedIndex == 0
                 ? 'home'
                 : selectedIndex == 1
                     ? 'work'
                     : 'currentLocation';
             return GestureDetector(
-              onTap: () {
+              onTap: () async {
                 if (!isPaying) {
-                  locationProvider
-                    ..updateAddress(
-                      addressMap: locationConsumer.addressMap,
-                    )
-                    ..saveLocationPressed(
-                      key: key,
-                      address: locationConsumer.address,
-                    ).then(
-                      (_) => locationProvider.updatePreviewImage(
-                        key: key,
-                        addressModel: locationConsumer.addressMap[key]!,
+                  locationProvider.updateAddress(
+                    addressMap: locationConsumer.addressMap,
+                  );
+                  await locationProvider.saveLocationPressed(
+                    key: addressKey,
+                    address: locationConsumer.address,
+                  );
+                  locationProvider.updatePreviewImage(
+                    key: addressKey,
+                    addressModel: locationConsumer.addressMap[addressKey]!,
+                  );
+                } else {
+                  if (locationConsumer.addressMap[addressKey]?.location?.getOrCrash() == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Please Add An Address'),
                       ),
                     );
-                } else {
-                  //Todo: Navigate to payment page
+                  } else {
+                    Get.toNamed(RouteHelper.getOrderSummaryScreen());
+                  }
                 }
               },
               child: Container(

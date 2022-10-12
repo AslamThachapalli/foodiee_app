@@ -44,6 +44,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   )
                 : Scaffold(
                     appBar: AppBar(
+                      automaticallyImplyLeading: false,
                       elevation: 0,
                       backgroundColor: AppColors.mainColor,
                       title: Center(

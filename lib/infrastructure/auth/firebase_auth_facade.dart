@@ -42,14 +42,12 @@ class FirebaseAuthFacade implements IAuthFacade {
         email: emailAddress.getOrCrash(),
         password: password.getOrCrash(),
       );
-      print('finished authentication');
 
       LoggedInUser loggedInUser = LoggedInUser(
         userName: userName,
         emailAddress: emailAddress,
         phoneNumber: phoneNumber,
       );
-      print('after logged in user; $loggedInUser , ${loggedInUser.toString()}');
 
       Option<CurrentUser> userOption = await getSignedInUser();
       userOption.fold(
@@ -59,7 +57,6 @@ class FirebaseAuthFacade implements IAuthFacade {
             .doc(user.id.getOrCrash())
             .set(LoggedInUserDto.fromDomain(loggedInUser).toJson()),
       );
-      print('after userOption');
 
       return right(unit);
     } on FirebaseAuthException catch (e) {
@@ -69,11 +66,9 @@ class FirebaseAuthFacade implements IAuthFacade {
           e.code == 'weak-password') {
         return left(const AuthFailure.emailAlreadyInUse());
       } else {
-        print(e.code);
         return left(const AuthFailure.serverError());
       }
     } catch (e) {
-      print(e);
       return left(const AuthFailure.serverError());
     }
   }
@@ -93,63 +88,9 @@ class FirebaseAuthFacade implements IAuthFacade {
       if (e.code == 'invalid-email' || e.code == 'wrong-password') {
         return left(const AuthFailure.invalidEmailAndPasswordCombination());
       } else {
-        print(e.code);
         return left(const AuthFailure.serverError());
       }
     } catch (e) {
-      print(e);
-      return left(const AuthFailure.serverError());
-    }
-  }
-
-  @override
-  Future<Either<AuthFailure, Unit>> signInWithGoogle() async {
-    try {
-      print('inside signIn method');
-      final googleUser = await _googleSignIn.signIn();
-      print('googleUser: $googleUser');
-      if (googleUser == null) {
-        return left(const AuthFailure.cancelledByUser());
-      }
-      print('googleuser != null');
-
-      final googleAuthentication = await googleUser.authentication;
-      final authCredential = GoogleAuthProvider.credential(
-        idToken: googleAuthentication.idToken,
-        accessToken: googleAuthentication.accessToken,
-      );
-      print('before userCredential');
-      UserCredential userCredential = await _firebaseAuth.signInWithCredential(authCredential);
-      print('authenticated');
-      User? user = userCredential.user!;
-
-      print('''username: ${user.displayName}
-      email: ${user.email}
-      phoneNumber: ${user.phoneNumber}''');
-
-      LoggedInUser loggedInUser = LoggedInUser(
-        userName: UserName(user.displayName),
-        emailAddress: EmailAddress(user.email!),
-        phoneNumber: PhoneNumber(user.phoneNumber == null ? null : int.parse(user.phoneNumber!)),
-      );
-      print('loggedInUser: $loggedInUser');
-
-      await _firebaseFirestore
-          .collection('users')
-          .doc(user.uid)
-          .set(LoggedInUserDto.fromDomain(loggedInUser).toJson());
-
-      // Option<CurrentUser> userOption = await getSignedInUser();
-      // userOption.fold(
-      //   () => null,
-      //   (user) async => await _firebaseFirestore
-      //       .collection('users')
-      //       .doc(user.id.getOrCrash())
-      //       .set(LoggedInUserDto.fromDomain(loggedInUser).toJson()),
-      // );
-
-      return right(unit);
-    } on FirebaseAuthException catch (_) {
       return left(const AuthFailure.serverError());
     }
   }

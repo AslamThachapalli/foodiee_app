@@ -104,21 +104,25 @@ class _PopularFoodViewState extends State<PopularFoodView> {
               right: Dimensions.pixels30,
               bottom: Dimensions.pixels20,
             ),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(Dimensions.pixels20), boxShadow: const [
-              BoxShadow(
-                color: Color(0xFFe8e8e8),
-                blurRadius: 5,
-                offset: Offset(0, 5),
-              ),
-              BoxShadow(
-                color: Colors.white,
-                offset: Offset(5, 0),
-              ),
-              BoxShadow(
-                color: Colors.white,
-                offset: Offset(-5, 0),
-              ),
-            ]),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(Dimensions.pixels20),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0xFFe8e8e8),
+                  blurRadius: 5,
+                  offset: Offset(0, 5),
+                ),
+                BoxShadow(
+                  color: Colors.white,
+                  offset: Offset(5, 0),
+                ),
+                BoxShadow(
+                  color: Colors.white,
+                  offset: Offset(-5, 0),
+                ),
+              ],
+            ),
             child: Padding(
               padding: EdgeInsets.all(Dimensions.pixels10),
               child: ProductNameAndStarColumn(

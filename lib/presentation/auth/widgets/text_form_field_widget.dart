@@ -25,7 +25,9 @@ class TextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: Dimensions.pixels45 + Dimensions.pixels15,
       margin: EdgeInsets.symmetric(horizontal: Dimensions.pixels20),
+      padding: EdgeInsets.all(Dimensions.pixels5),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(Dimensions.pixels30),
@@ -34,27 +36,29 @@ class TextFormFieldWidget extends StatelessWidget {
               color: Colors.grey.withOpacity(0.25),
               blurRadius: Dimensions.pixels5 + 3,
               // spreadRadius: 2,
-              offset: Offset(1, 3),
+              offset: const Offset(1, 3),
             )
           ]),
-      child: TextFormField(
-        onChanged: onChanged,
-        validator: validator,
-        decoration: InputDecoration(
-          prefixIcon: Icon(
-            icon,
-            color: AppColors.mainColor,
+      child: Center(
+        child: TextFormField(
+          onChanged: onChanged,
+          validator: validator,
+          decoration: InputDecoration(
+            prefixIcon: Icon(
+              icon,
+              color: AppColors.mainColor,
+            ),
+            hintText: hintText,
+            counterText: '',
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(Dimensions.pixels30),
+              borderSide: BorderSide.none,
+            ),
           ),
-          hintText: hintText,
-          counterText: '',
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(Dimensions.pixels30),
-            borderSide: BorderSide.none,
-          ),
+          maxLength: maxLength,
+          keyboardType: keyboardType,
+          obscureText: obscureText,
         ),
-        maxLength: maxLength,
-        keyboardType: keyboardType,
-        obscureText: obscureText,
       ),
     );
   }

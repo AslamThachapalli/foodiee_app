@@ -65,6 +65,8 @@ class UserDetailWidget extends StatelessWidget {
                 Get.toNamed(RouteHelper.getSelectLocationScreen(), arguments: [
                   loggedInUser.userName.getOrCrash(),
                   loggedInUser.phoneNumber.getOrCrash(),
+                  false, //isPaying?
+                  false, //isFromCart?
                 ]);
               },
               child: AccountWidget(

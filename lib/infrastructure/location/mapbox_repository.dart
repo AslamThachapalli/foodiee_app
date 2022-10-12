@@ -20,7 +20,6 @@ class MapboxRepository implements IMapboxRepository {
     Uri url = Uri.parse(
         'https://api.mapbox.com/geocoding/v5/mapbox.places/$longitude,$latitude.json?access_token=$MAPBOX_API_KEY');
     final response = await http.get(url);
-    print(response.body);
     return json.decode(response.body)['features'][0]['place_name'];
   }
 

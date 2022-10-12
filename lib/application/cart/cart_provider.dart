@@ -51,21 +51,19 @@ class CartProvider with ChangeNotifier {
     required int price,
     required String name,
     required String imageUrl,
-    bool isExist = true,
   }) async {
     final cartOption = await _cartRepository.getCart();
 
     if (cartOption.isNone()) {
       _cart = await _cartRepository.addToCart(
         cartId: UniqueId.fromUuid(),
-        createdAt: CreatedAt(DateFormat('dd-MM-YYYY hh:mm a').format(DateTime.now())),
+        createdAt: CreatedAt(DateFormat('dd-MM-yyyy hh:mm a').format(DateTime.now())),
         cartItem: CartItem(
           productId: UniqueId(productId),
           name: ProductName(name),
           imageUrl: ImageUrl(imageUrl),
           price: Price(price),
           quantity: Quantity(productCount),
-          isExist: isExist,
         ),
       );
     } else {
@@ -76,7 +74,6 @@ class CartProvider with ChangeNotifier {
           imageUrl: ImageUrl(imageUrl),
           price: Price(price),
           quantity: Quantity(productCount),
-          isExist: isExist,
         ),
       );
     }
@@ -123,6 +120,21 @@ class CartProvider with ChangeNotifier {
         isIncrementing: false,
       );
     }
+    _cartCount = _cart.quantity.getOrCrash();
+    notifyListeners();
+  }
+
+  Future<void> removeCart() async {
+    await _cartRepository.deleteCart();
+    _cart = Cart.empty();
+    _cartCount = 0;
+    notifyListeners();
+  }
+
+  Future<void> repeatCartPressed({required Cart cart}) async {
+    await _cartRepository.deleteCart();
+    _cart = await _cartRepository.addCart(cart.copyWith(
+        createdAt: CreatedAt(DateFormat('dd-MM-yyyy hh:mm a').format(DateTime.now()))));
     _cartCount = _cart.quantity.getOrCrash();
     notifyListeners();
   }

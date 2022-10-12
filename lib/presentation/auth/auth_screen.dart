@@ -6,13 +6,12 @@ import '../../application/auth/auth_provider.dart';
 import '../core/app_colors.dart';
 import '../core/dimensions.dart';
 import './widgets/text_form_field_widget.dart';
-import './widgets/google_sign_in_widget.dart';
 import './widgets/sign_in_button.dart';
 import './widgets/sign_in_welcome_widget.dart';
 
 class AuthScreen extends StatefulWidget {
   final bool isFromCart;
-  const AuthScreen({Key? key, this.isFromCart = false}) : super(key: key);
+  const AuthScreen({Key? key, required this.isFromCart}) : super(key: key);
 
   @override
   State<AuthScreen> createState() => _AuthScreenState();
@@ -178,12 +177,16 @@ class _AuthScreenState extends State<AuthScreen> {
                 indent: Dimensions.pixels20,
                 endIndent: Dimensions.pixels20,
               ),
-              SizedBox(height: Dimensions.pixels20),
+              SizedBox(height: Dimensions.pixels30),
 
-              //Google SignIn
-              GoogleSignInWidget(
-                authProvider: authProvider,
-                isFromCart: widget.isFromCart,
+              const Text(
+                'THE BELLY RULES THE MIND',
+                style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.black54,
+                    decoration: TextDecoration.overline),
               ),
               SizedBox(height: Dimensions.pixels10)
             ],

@@ -24,10 +24,12 @@ class NavigationGuideRepository implements INavigationGuideRepo {
         return right(const NavigationOption.noUser());
       } else {
         final userDetail = await _firebaseFirestore.collection('users').doc(currentUser.uid).get();
-        Map<String, String?> userAddressFromJson = userDetail.data()!['address'];
+        final userAddressFromJson = userDetail.data()!['address'];
         Address address = AddressDto.fromJson(userAddressFromJson).toDomain();
 
-        if (address.home == null && address.work == null && address.currentLocation == null) {
+        if (address.home.location?.getOrCrash() == null &&
+            address.work.location?.getOrCrash() == null &&
+            address.currentLocation.location?.getOrCrash() == null) {
           return right(const NavigationOption.noAddress());
         } else {
           return right(const NavigationOption.selectAddress());

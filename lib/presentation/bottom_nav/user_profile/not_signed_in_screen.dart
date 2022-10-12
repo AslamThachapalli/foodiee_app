@@ -18,13 +18,13 @@ class NotSignedInScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const NoDataWidget(
-            text: 'You Are Not Logged In!',
+            text: 'You Are Not Signed In!',
             imagePath: 'assets/images/sign_in.jpg',
           ),
           SizedBox(height: Dimensions.pixels20),
           GestureDetector(
             onTap: () {
-              Get.toNamed(RouteHelper.getAuthScreen());
+              Get.toNamed(RouteHelper.getAuthScreen(), arguments: false);
             },
             child: Container(
               height: Dimensions.pixels90 - Dimensions.pixels20,

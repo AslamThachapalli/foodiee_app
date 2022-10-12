@@ -36,7 +36,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           },
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
+              icon: Icon(Icons.home_filled),
               label: 'Home Page',
             ),
             BottomNavigationBarItem(
@@ -44,7 +44,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
               label: 'Orders History',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart_outlined),
+              icon: Icon(Icons.shopping_cart_rounded),
               label: 'Cart History',
             ),
             BottomNavigationBarItem(

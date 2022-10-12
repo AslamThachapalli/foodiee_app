@@ -10,6 +10,9 @@ _$_CartDto _$$_CartDtoFromJson(Map<String, dynamic> json) => _$_CartDto(
       cartId: json['cartId'] as String,
       quantity: json['quantity'] as int,
       amount: json['amount'] as int,
+      cartItems: (json['cartItems'] as List<dynamic>?)
+          ?.map((e) => CartItemDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
       createdAt: json['createdAt'] as String,
     );
 
@@ -18,6 +21,7 @@ Map<String, dynamic> _$$_CartDtoToJson(_$_CartDto instance) =>
       'cartId': instance.cartId,
       'quantity': instance.quantity,
       'amount': instance.amount,
+      'cartItems': instance.cartItems?.map((e) => e.toJson()).toList(),
       'createdAt': instance.createdAt,
     };
 
@@ -28,7 +32,6 @@ _$_CartItemDto _$$_CartItemDtoFromJson(Map<String, dynamic> json) =>
       imageUrl: json['imageUrl'] as String,
       price: json['price'] as int,
       quantity: json['quantity'] as int,
-      isExist: json['isExist'] as int,
     );
 
 Map<String, dynamic> _$$_CartItemDtoToJson(_$_CartItemDto instance) =>
@@ -38,5 +41,4 @@ Map<String, dynamic> _$$_CartItemDtoToJson(_$_CartItemDto instance) =>
       'imageUrl': instance.imageUrl,
       'price': instance.price,
       'quantity': instance.quantity,
-      'isExist': instance.isExist,
     };

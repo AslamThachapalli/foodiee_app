@@ -23,8 +23,10 @@ class CartRepository implements ICartRepository {
   }
 
   Future<void> _onCreate(Database db, int version) async {
-    await db.execute('CREATE TABLE cart(cartId STRING PRIMARY KEY , quantity INTEGER, amount INTEGER, createdAt STRING)');
-    await db.execute('CREATE TABLE cart_items(productId STRING PRIMARY KEY, name STRING, imageUrl STRING, price INTEGER, quantity INTEGER, isExist INTEGER)');
+    await db.execute(
+        'CREATE TABLE cart(cartId STRING PRIMARY KEY , quantity INTEGER, amount INTEGER, createdAt STRING)');
+    await db.execute(
+        'CREATE TABLE cart_items(productId STRING PRIMARY KEY, name STRING, imageUrl STRING, price INTEGER, quantity INTEGER)');
   }
 
   @override
@@ -48,11 +50,16 @@ class CartRepository implements ICartRepository {
     if (cartMapList.isNotEmpty) {
       final cartList = cartMapList.map((cartMap) => CartDto.fromJson(cartMap).toDomain()).toList();
       final cartItemMapList = await db.query('cart_items');
-      final cartItemList = cartItemMapList
-          .map(
-            (cartItemMap) => CartItemDto.fromJson(cartItemMap).toDomain(),
-          )
-          .toList();
+
+      List<CartItem> cartItemList;
+      cartItemMapList.isNotEmpty
+          ? cartItemList = cartItemMapList
+              .map(
+                (cartItemMap) => CartItemDto.fromJson(cartItemMap).toDomain(),
+              )
+              .toList()
+          : cartItemList = <CartItem>[];
+
       return some(cartList[0].copyWith(items: cartItemList));
     } else {
       return none();
@@ -60,7 +67,8 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Cart> addToCart({UniqueId? cartId, CreatedAt? createdAt, required CartItem cartItem}) async {
+  Future<Cart> addToCart(
+      {UniqueId? cartId, CreatedAt? createdAt, required CartItem cartItem}) async {
     final db = await database();
 
     if (cartId == null) {
@@ -84,10 +92,12 @@ class CartRepository implements ICartRepository {
           whereArgs: [cartItem.productId.getOrCrash()],
         );
 
-        cartQuantity = (cartMapList[0]['quantity'] as int) - (cartItemQuantityList[0]['quantity'] as int);
+        cartQuantity =
+            (cartMapList[0]['quantity'] as int) - (cartItemQuantityList[0]['quantity'] as int);
         cartQuantity += cartItem.quantity.getOrCrash();
 
-        cartAmount = (cartMapList[0]['amount'] as int) - ((cartItemQuantityList[0]['quantity'] as int) * cartItem.price.getOrCrash());
+        cartAmount = (cartMapList[0]['amount'] as int) -
+            ((cartItemQuantityList[0]['quantity'] as int) * cartItem.price.getOrCrash());
         cartAmount += (cartItem.quantity.getOrCrash() * cartItem.price.getOrCrash());
       } else {
         await db.insert(
@@ -218,5 +228,49 @@ class CartRepository implements ICartRepository {
       id,
     );
     return some(cart!);
+  }
+
+  @override
+  Future<Unit> deleteCart() async {
+    final db = await database();
+    Future.wait([
+      db.delete('cart'),
+      db.delete('cart_items'),
+    ]);
+    return unit;
+  }
+
+  @override
+  Future<Cart> addCart(Cart cart) async {
+    final db = await database();
+
+    List<CartItem> cartItemList = cart.items;
+
+    await db.insert(
+      'cart',
+      {
+        'cartId': cart.cartId.getOrCrash(),
+        'quantity': cart.quantity.getOrCrash(),
+        'amount': cart.amount.getOrCrash(),
+        'createdAt': cart.createdAt.getOrCrash(),
+      },
+    );
+
+    for (CartItem cartItem in cartItemList) {
+      await db.insert(
+        'cart_items',
+        CartItemDto.fromDomain(cartItem).toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    }
+
+    final cartOption = await getCart();
+    Cart? updatedCart;
+    updatedCart = cartOption.fold(
+      () => null,
+      id,
+    );
+
+    return updatedCart!;
   }
 }

@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get.dart';
 
-import '../../application/cart/cart_provider.dart';
 import '../../application/cart/data_persistence_provider.dart';
+import '../../application/cart_history/cart_history_provider.dart';
 import '../../application/product_fetching/product_provider.dart';
 import '../../application/auth/auth_provider.dart';
 import '../../application/navigation_guide/navigation_guide_provider.dart';
 import '../../application/user_detail/user_detail_provider.dart';
 import '../../application/location/location_provider.dart';
+import '../../application/cart/cart_provider.dart';
+import '../../application/order/order_provider.dart';
 import '../../injection.dart';
+import '../splash/splash_screen.dart';
 import './app_colors.dart';
 import '../routes/route_helper.dart';
 
@@ -46,6 +49,12 @@ class MyApp extends StatelessWidget {
           update: (_, userDetailProvider, locationProvider) =>
               getIt<LocationProvider>()..update(userDetailProvider.address),
         ),
+        ChangeNotifierProvider(
+          create: (context) => getIt<CartHistoryProvider>(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => getIt<OrderProvider>(),
+        ),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
@@ -60,14 +69,9 @@ class MyApp extends StatelessWidget {
             unselectedItemColor: Colors.grey[600],
             elevation: 5,
           ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              primary: AppColors.mainColor,
-            ),
-          ),
         ),
-        home: const BottomNavScreen(),
-        initialRoute: RouteHelper.initial,
+        // home: const SplashScreen(),
+        initialRoute: RouteHelper.splashScreen,
         getPages: RouteHelper.routes,
       ),
     );
