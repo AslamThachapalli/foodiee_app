@@ -15,4 +15,4 @@ This contains all core functionalities of an e-commerce app like adding to cart,
 - **GetX** is used for routing.
 > Freezed, Get_It, Injectable and much more is used to fire this app.
 
-Feel free to browse through the code and explore the app.
+Feel free to browse the code and explore the app.
