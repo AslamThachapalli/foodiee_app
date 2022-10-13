@@ -1,16 +1,18 @@
 # foodiee_app
 
-A new Flutter project.
+This is a food ordering app.\
+The app contains all core functionalities of an e-commerce app such as adding to cart, updating location, payment fumctionalities, order summary and more!
 
-## Getting Started
+## App Summary
 
-This project is a starting point for a Flutter application.
+- The app is built on ***Domain Driven Design(DDD) architecture***.
+- **ChangeNotifier** manages the state.
+- **Razorpay** provides the payment-gateway.
+- **Firebase** powers the backend.
+- **Mapbox** API is integrated for location updates.
+- **sqflite** is used as the local database.
+- **GetStorage** is used for data persistance.
+- **GetX** is used for routing.
+> Freezed, Get_It, Injectable and much more is used to fire this app.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Feel free to browse the code and explore the app.
