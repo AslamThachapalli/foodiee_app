@@ -13,29 +13,26 @@ class NoDataWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Image.asset(
-            imagePath,
-            height: MediaQuery.of(context).size.height * 0.35,
-            width: MediaQuery.of(context).size.width * 0.35,
-            alignment: Alignment.center,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Image.asset(
+          imagePath,
+          height: MediaQuery.of(context).size.height * 0.35,
+          width: MediaQuery.of(context).size.width * 0.35,
+          alignment: Alignment.center,
+        ),
+        SizedBox(height: Dimensions.pixels10),
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.height * 0.017,
+            color: Theme.of(context).disabledColor,
           ),
-          SizedBox(height: Dimensions.pixels10),
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: MediaQuery.of(context).size.height * 0.017,
-              color: Theme.of(context).disabledColor,
-            ),
-            textAlign: TextAlign.center,
-          )
-        ],
-      ),
+          textAlign: TextAlign.center,
+        )
+      ],
     );
   }
 }

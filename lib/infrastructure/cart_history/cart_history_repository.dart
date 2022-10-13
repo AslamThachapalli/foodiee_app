@@ -1,11 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:foodiee_app/domain/cart/cart.dart';
-import 'package:foodiee_app/domain/cart_history/i_cart_history_repo.dart';
-import 'package:foodiee_app/domain/core/firestore_failures.dart';
-import 'package:foodiee_app/infrastructure/cart/cart_dtos.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../domain/cart/cart.dart';
+import '../../domain/cart_history/i_cart_history_repo.dart';
+import '../../domain/core/firestore_failures.dart';
+import './cart_history_dtos.dart';
 
 @LazySingleton(as: ICartHistoryRepo)
 class CartHistoryRepository implements ICartHistoryRepo {
@@ -25,7 +26,7 @@ class CartHistoryRepository implements ICartHistoryRepo {
           .doc(currentUser!.uid)
           .collection('cartHistory')
           .doc(cart.cartId.getOrCrash())
-          .set(CartDto.fromDomain(cart).toJson());
+          .set(CartHistoryDto.fromDomain(cart).toJson());
       return right(unit);
     } on FirebaseException catch (_) {
       return left(const FirestoreFailure.unexpected());
@@ -40,7 +41,11 @@ class CartHistoryRepository implements ICartHistoryRepo {
 
     final userDoc = _firebaseFirestore.collection('users').doc(currentUser?.uid);
 
-    yield* userDoc.collection('cartHistory').snapshots().map(
+    yield* userDoc
+        .collection('cartHistory')
+        .orderBy('serverTimeStamp', descending: true)
+        .snapshots()
+        .map(
       (snapshot) {
         if (snapshot.docs.isEmpty) {
           return right<FirestoreFailure, List<Cart>>(<Cart>[]);
@@ -48,10 +53,8 @@ class CartHistoryRepository implements ICartHistoryRepo {
         return right<FirestoreFailure, List<Cart>>(
           snapshot.docs
               .map(
-                (doc) => CartDto.fromJson(doc.data()).toDomain(),
+                (doc) => CartHistoryDto.fromJson(doc.data()).toDomain(),
               )
-              .toList()
-              .reversed
               .toList(),
         );
       },

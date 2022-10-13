@@ -16,11 +16,6 @@ class CartHistoryProvider with ChangeNotifier {
   }) async {
     final response = await _iCartHistoryRepo.addToServer(cart: cart);
     return response;
-    // Either<FirestoreFailure, Unit> either = response.fold(
-    //   (failure) => left(failure),
-    //   (_) => right(unit),
-    // );
-    // return either;
   }
 
   Future<Either<FirestoreFailure, List<Cart>>> fetchFromServer() async {

@@ -37,14 +37,14 @@ class UserDetailWidget extends StatelessWidget {
             //UserName
             AccountWidget(
               icon: Icons.person,
-              text: loggedInUser.userName.getOrCrash().toString(),
+              text: loggedInUser.userName.getOrCrash()?.toString(),
             ),
             SizedBox(height: Dimensions.pixels10),
 
             //PhoneNumber
             AccountWidget(
               icon: Icons.phone,
-              text: loggedInUser.phoneNumber.getOrCrash().toString(),
+              text: loggedInUser.phoneNumber.getOrCrash()?.toString(),
               backgroundColor: AppColors.yellowColor,
             ),
             SizedBox(height: Dimensions.pixels10),

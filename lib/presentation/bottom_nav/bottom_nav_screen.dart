@@ -16,9 +16,9 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   int _currentIndex = 0;
 
   final _pages = [
-    HomePageScreen(),
-    OrderStatusScreen(),
-    CartHistoryScreen(),
+    const HomePageScreen(),
+    const OrderStatusScreen(),
+    const CartHistoryScreen(),
     UserProfileScreen(),
   ];
 

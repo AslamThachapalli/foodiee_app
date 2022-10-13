@@ -67,6 +67,7 @@ class HomePageScreen extends StatelessWidget {
         //The scrollable products view body portion
         Expanded(
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
                 const PopularFoodIntermediary(),

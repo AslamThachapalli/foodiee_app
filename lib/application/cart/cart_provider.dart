@@ -134,6 +134,7 @@ class CartProvider with ChangeNotifier {
   Future<void> repeatCartPressed({required Cart cart}) async {
     await _cartRepository.deleteCart();
     _cart = await _cartRepository.addCart(cart.copyWith(
+        cartId: UniqueId.fromUuid(),
         createdAt: CreatedAt(DateFormat('dd-MM-yyyy hh:mm a').format(DateTime.now()))));
     _cartCount = _cart.quantity.getOrCrash();
     notifyListeners();

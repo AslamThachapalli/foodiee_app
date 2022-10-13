@@ -7,7 +7,7 @@ import '../../../core/dimensions.dart';
 
 class AccountWidget extends StatelessWidget {
   final IconData icon;
-  final String text;
+  final String? text;
   Color? backgroundColor;
   AccountWidget({
     Key? key,
@@ -38,7 +38,7 @@ class AccountWidget extends StatelessWidget {
           ),
           SizedBox(width: Dimensions.pixels10),
           BigText(
-            text: text,
+            text: text ?? '',
             fontWeight: FontWeight.w400,
             size: Dimensions.font18,
           ),

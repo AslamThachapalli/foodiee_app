@@ -3,8 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:get/get.dart';
 
 import '../../../application/location/location_provider.dart';
-import '../../../application/cart/cart_provider.dart';
-import '../../../application/user_detail/user_detail_provider.dart';
 import '../../core/app_colors.dart';
 import '../../core/dimensions.dart';
 import '../../core/small_text.dart';
@@ -32,8 +30,8 @@ class BottomNavBarWidget extends StatelessWidget {
         ),
       ),
       child: Center(
-        child: Consumer3<LocationProvider, UserDetailProvider, CartProvider>(
-          builder: (context, locationConsumer, userDetailProvider, cartProvider, _) {
+        child: Consumer<LocationProvider>(
+          builder: (context, locationConsumer, _) {
             int selectedIndex = locationConsumer.index;
             String addressKey = selectedIndex == 0
                 ? 'home'
@@ -74,7 +72,13 @@ class BottomNavBarWidget extends StatelessWidget {
                   color: AppColors.mainColor,
                 ),
                 child: SmallText(
-                  text: isPaying ? 'Continue' : 'Save Location',
+                  text: !isPaying
+                      ? 'Save Location'
+                      : (isPaying &&
+                              locationConsumer.addressMap[addressKey]?.location?.getOrCrash() !=
+                                  null)
+                          ? 'Continue'
+                          : 'Select Location',
                   color: Colors.white,
                   size: Dimensions.font18,
                 ),

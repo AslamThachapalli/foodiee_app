@@ -26,13 +26,6 @@ class OrderProvider with ChangeNotifier {
       cartId: CartId(cartId),
     ));
     return result;
-
-    // final either = result.fold(
-    //   (failure) => left(failure),
-    //   (_) => right(unit),
-    // );
-    //
-    // return either as Either<FirestoreFailure, Unit>;
   }
 
   Future<Either<FirestoreFailure, List<order.Order>>> fetchFromServer() async {
