@@ -7,8 +7,7 @@ import 'package:location/location.dart';
 
 import '../../domain/location/i_mapbox_repository.dart';
 
-const MAPBOX_API_KEY =
-    'pk.eyJ1Ijoia25vd2FzbGFtdHMiLCJhIjoiY2w4dHZpZDMyMGI3aTN1bW5ydnBqcDFkeCJ9.ToIUkDmXTw7BTbhwAy_87Q';
+const MAPBOX_API_KEY = 'Paste_your_api_key_here';
 
 @LazySingleton(as: IMapboxRepository)
 class MapboxRepository implements IMapboxRepository {

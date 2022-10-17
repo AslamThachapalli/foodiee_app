@@ -27,11 +27,11 @@ class RouteHelper {
 
   static String getPopularFood(int pageId) => '$popularFoodDetail?pageId=$pageId';
   static String getRecommendedFood(int pageId) => '$recommendedFoodDetail?pageId=$pageId';
-  static String getCartScreen() => '$cartScreen';
-  static String getAuthScreen() => '$authScreen';
-  static String getSelectLocationScreen() => '$selectLocationScreen';
-  static String getMapScreen() => '$mapScreen';
-  static String getOrderSummaryScreen() => '$orderSummaryScreen';
+  static String getCartScreen() => cartScreen;
+  static String getAuthScreen() => authScreen;
+  static String getSelectLocationScreen() => selectLocationScreen;
+  static String getMapScreen() => mapScreen;
+  static String getOrderSummaryScreen() => orderSummaryScreen;
   static String getErrorPage(String errorType) => '$errorPage?type=$errorType';
   static String getPaymentFailureScreen(
     String? code,

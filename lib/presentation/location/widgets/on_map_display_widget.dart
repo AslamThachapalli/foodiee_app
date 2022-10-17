@@ -7,7 +7,7 @@ import '../../core/dimensions.dart';
 
 class OnMapDisplayWidget extends StatelessWidget {
   final String text;
-  OnMapDisplayWidget({
+   OnMapDisplayWidget({
     Key? key,
     required this.text,
   }) : super(key: key);

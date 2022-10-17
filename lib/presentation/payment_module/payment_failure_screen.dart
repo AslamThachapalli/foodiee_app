@@ -9,7 +9,11 @@ import '../routes/route_helper.dart';
 class PaymentFailureScreen extends StatelessWidget {
   final String? code;
   final String? message;
-  const PaymentFailureScreen({Key? key, this.code, this.message,}) : super(key: key);
+  const PaymentFailureScreen({
+    Key? key,
+    this.code,
+    this.message,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +31,9 @@ class PaymentFailureScreen extends StatelessWidget {
           ),
           SizedBox(height: Dimensions.pixels10),
           Text(
-            'Error $code\n$message\nPayment Failed',
+            'An Error Occurred\nPayment Failed',
             style: TextStyle(
-              fontSize: MediaQuery.of(context).size.height * 0.017,
+              fontSize: MediaQuery.of(context).size.height * 0.02,
               color: Theme.of(context).disabledColor,
               height: 1.5,
             ),
@@ -38,10 +42,11 @@ class PaymentFailureScreen extends StatelessWidget {
           SizedBox(height: Dimensions.pixels20),
           GestureDetector(
             onTap: () {
-              Get.toNamed(RouteHelper.getOrderSummaryScreen());
+              // Get.offNamed(RouteHelper.getOrderSummaryScreen());
+              Get.back();
             },
             child: Container(
-              height: Dimensions.pixels90 - Dimensions.pixels20,
+              height: Dimensions.pixels90 - Dimensions.pixels30,
               width: Dimensions.pixels20 * 7,
               padding: EdgeInsets.symmetric(
                   horizontal: Dimensions.pixels10, vertical: Dimensions.pixels15),

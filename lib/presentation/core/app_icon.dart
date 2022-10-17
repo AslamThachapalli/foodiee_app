@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:foodiee_app/presentation/core/dimensions.dart';
 
 class AppIcon extends StatelessWidget {
   final IconData icon;

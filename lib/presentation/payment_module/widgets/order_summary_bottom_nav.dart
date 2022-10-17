@@ -39,7 +39,7 @@ class _OrderSummaryBottomNavState extends State<OrderSummaryBottomNav> {
     required String email,
   }) {
     var options = {
-      'key': 'rzp_test_LmQcQiPk7zISjZ',
+      'key': 'TEST_API_KEY',
       'amount': amount,
       'name': 'Foodiee App',
       'description': 'Food at your Fingertip',

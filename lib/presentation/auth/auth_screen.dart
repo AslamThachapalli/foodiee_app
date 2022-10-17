@@ -85,7 +85,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         onChanged: (value) {
                           if (value != '') {
                             Provider.of<AuthProvider>(context, listen: false)
-                                .phoneNumberChanged(int?.parse(value));
+                                .phoneNumberChanged(int.parse(value));
                           }
                         },
                         validator: (_) => authProvider.authState.phoneNumber.value.fold(
