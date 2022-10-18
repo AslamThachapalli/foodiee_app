@@ -1,7 +1,7 @@
 # foodiee_app
 
 This is a food ordering app.\
-The app contains all core functionalities of an e-commerce app such as adding to cart, updating location, payment fumctionalities, order summary and more!
+The app contains all core functionalities of an e-commerce app such as adding to cart, updating location, payment functionality, order summary and more!
 
 ## App Summary
 
