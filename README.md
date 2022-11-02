@@ -96,7 +96,7 @@ Feel free to browse the code and explore the app.
   </tr>
  </table>
  
- There are more in the real app. Feel free to install the app and explore at your own pace.
+ There is more in the real app. Feel free to install the app and explore at your own pace.
 
 ## Attributions
 
