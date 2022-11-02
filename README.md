@@ -31,6 +31,45 @@ Feel free to browse the code and explore the app.
     <td><img src="https://user-images.githubusercontent.com/113328135/199424625-4fb1757b-11a9-4e6b-916c-2f4b6a6a0bad.jpeg" width=280 height=500></td>
   </tr>
  </table>
+ 
+ <table>
+  <tr>
+    <td>Empty Cart Screen</td>
+     <td>Popular product detail screen</td>
+     <td>Recommended product detail screen</td>
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199425487-0e4e6e54-ad7b-4efa-a2cf-abd9b801367d.jpeg" width=280 height=500></td>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199425625-d0670a72-a02c-44bc-84af-70df849613d3.jpeg" width=280 height=500></td>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199425671-bde88473-6f90-423b-b55f-7fc6948a5dfa.jpeg" width=280 height=500></td>
+  </tr>
+ </table>
+ 
+  <table>
+  <tr>
+    <td>Sign In Screen</td>
+     <td>User profile screen</td>
+     <td>Cart Screen</td>
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199426003-e5b2b04a-3d68-495f-8da2-662c4971d7bb.jpeg" width=280 height=500></td>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199426177-3f8ccffe-355e-4c76-914e-90a6a8fad8af.jpeg" width=280 height=500></td>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199426364-e231b5b5-48d2-42b9-8a38-b9a8079b7556.jpeg" width=280 height=500></td>
+  </tr>
+ </table>
+ 
+  <table>
+  <tr>
+    <td>If cart history is empty</td>
+     <td>Cart History Screen</td>
+     <td>Order Summary Screen</td>
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199426543-7d9d0cd2-1642-41c8-922f-f383badd7be5.jpeg" width=280 height=500></td>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199426911-225ba558-efa6-4428-a3f4-ca70b7b31502.jpeg" width=280 height=500></td>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199427335-e1bc1333-0822-4177-896d-f213f8d662b0.jpeg" width=280 height=500></td>
+  </tr>
+ </table>
 
 ## Attributions
 
@@ -44,3 +83,6 @@ Feel free to browse the code and explore the app.
 
 
 
+
+
+![WhatsApp Image 2022-11-02 at 12 40 11 PM](https://user-images.githubusercontent.com/113328135/199427335-e1bc1333-0822-4177-896d-f213f8d662b0.jpeg)
