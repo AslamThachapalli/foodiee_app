@@ -66,7 +66,7 @@ Feel free to browse the code and explore the app.
   </tr>
   <tr>
     <td><img src="https://user-images.githubusercontent.com/113328135/199426543-7d9d0cd2-1642-41c8-922f-f383badd7be5.jpeg" width=280 height=500></td>
-    <td><img src="https://user-images.githubusercontent.com/113328135/199426911-225ba558-efa6-4428-a3f4-ca70b7b31502.jpeg" width=280 height=500></td>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199429515-edf10f8f-5f34-4355-809d-4f6f428e84f3.jpeg" width=280 height=500></td>
     <td><img src="https://user-images.githubusercontent.com/113328135/199427335-e1bc1333-0822-4177-896d-f213f8d662b0.jpeg" width=280 height=500></td>
   </tr>
  </table>
