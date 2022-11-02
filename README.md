@@ -17,6 +17,21 @@ The app contains all core functionalities of an e-commerce app such as adding to
 
 Feel free to browse the code and explore the app.
 
+## App Screenshots
+
+<table>
+  <tr>
+    <td>Home Screen</td>
+     <td>Not signed in warning</td>
+     <td>Profile page if user not signed in</td>
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199424182-723e0bab-50c1-4e9d-82ef-5b461be9f02d.jpeg" width=270 height=480></td>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199424385-e0a0761a-1253-4979-a4c2-2f071e77525b.jpeg" width=270 height=480></td>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199424625-4fb1757b-11a9-4e6b-916c-2f4b6a6a0bad.jpeg" width=270 height=480></td>
+  </tr>
+ </table>
+
 ## Attributions
 
 - [fast png from pngtree.com](https://pngtree.com/so/fast)
@@ -26,3 +41,6 @@ Feel free to browse the code and explore the app.
 - [Image by storyset](https://www.freepik.com/free-vector/no-data-concept-illustration_5928294.htm#query=no%20data&position=5&from_view=search&track=sph)
 - [Image by storyset](https://www.freepik.com/free-vector/no-data-concept-illustration_5928296.htm#query=no%20data&position=12&from_view=search&track=sph)
 - [Image by storyset](https://www.freepik.com/free-vector/current-location-concept-illustration_11641795.htm#query=location&position=33&from_view=search&track=sph)
+
+
+
