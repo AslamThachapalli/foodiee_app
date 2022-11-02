@@ -70,6 +70,33 @@ Feel free to browse the code and explore the app.
     <td><img src="https://user-images.githubusercontent.com/113328135/199427335-e1bc1333-0822-4177-896d-f213f8d662b0.jpeg" width=280 height=500></td>
   </tr>
  </table>
+ 
+  <table>
+  <tr>
+    <td>Payment Screen</td>
+     <td>Address Screen</td>
+     <td>Pick Location Screen</td>
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199427618-e6d707b1-3b5f-4ba5-a0b2-ac76e7d71983.jpeg" width=280 height=500></td>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199428076-b3f788a2-6d9f-4a1e-9d36-52c8387feb31.jpeg" width=280 height=500></td>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199428191-99be3d70-0ac2-4ec5-bc85-6eee2e131ea7.jpeg" width=280 height=500></td>
+  </tr>
+ </table>
+ 
+ 
+  <table>
+  <tr>
+    <td>Empty Order History Screen</td>
+     <td>Order History Screen</td>
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199428388-1b30a031-9ae0-432a-8295-586a514213df.jpeg" width=280 height=500></td>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199428545-8b11c8b8-7466-477d-9b7a-fb604c2d325c.jpeg" width=280 height=500></td>
+  </tr>
+ </table>
+ 
+ There are more in the real app. Feel free to install the app and explore at your own pace.
 
 ## Attributions
 
@@ -81,8 +108,3 @@ Feel free to browse the code and explore the app.
 - [Image by storyset](https://www.freepik.com/free-vector/no-data-concept-illustration_5928296.htm#query=no%20data&position=12&from_view=search&track=sph)
 - [Image by storyset](https://www.freepik.com/free-vector/current-location-concept-illustration_11641795.htm#query=location&position=33&from_view=search&track=sph)
 
-
-
-
-
-![WhatsApp Image 2022-11-02 at 12 40 11 PM](https://user-images.githubusercontent.com/113328135/199427335-e1bc1333-0822-4177-896d-f213f8d662b0.jpeg)
