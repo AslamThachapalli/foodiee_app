@@ -26,9 +26,9 @@ Feel free to browse the code and explore the app.
      <td>Profile page if user not signed in</td>
   </tr>
   <tr>
-    <td><img src="https://user-images.githubusercontent.com/113328135/199424182-723e0bab-50c1-4e9d-82ef-5b461be9f02d.jpeg" width=33%</td>
-    <td><img src="https://user-images.githubusercontent.com/113328135/199424385-e0a0761a-1253-4979-a4c2-2f071e77525b.jpeg" width=270 height=480></td>
-    <td><img src="https://user-images.githubusercontent.com/113328135/199424625-4fb1757b-11a9-4e6b-916c-2f4b6a6a0bad.jpeg" width=270 height=480></td>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199424182-723e0bab-50c1-4e9d-82ef-5b461be9f02d.jpeg" width=33%></td>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199424385-e0a0761a-1253-4979-a4c2-2f071e77525b.jpeg" width=33%></td>
+    <td><img src="https://user-images.githubusercontent.com/113328135/199424625-4fb1757b-11a9-4e6b-916c-2f4b6a6a0bad.jpeg" width=33%></td>
   </tr>
  </table>
 
